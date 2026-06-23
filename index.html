@@ -69,8 +69,10 @@
       font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;
       font-weight: 500;
       transition: color 0.2s;
+      cursor: pointer;
     }
-    .nav-links a:hover { color: var(--gold); }
+    .nav-links a:hover,
+    .nav-links a.nav-active { color: var(--gold); }
     .nav-cta {
       background: var(--gold); color: var(--dark);
       padding: 10px 24px; border: none; cursor: pointer;
@@ -96,6 +98,10 @@
     .nav-toggle.active span:nth-child(2) { opacity: 0; }
     .nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
+    /* ── PAGE SECTIONS ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
     /* ── HERO SLIDESHOW ── */
     #hero {
       position: relative;
@@ -112,9 +118,7 @@
       transition: opacity 1.4s ease-in-out;
       animation: slowZoom 18s ease-in-out infinite alternate;
     }
-    .hero-slide.active {
-      opacity: 1;
-    }
+    .hero-slide.active { opacity: 1; }
     .hero-slide:nth-child(1) { background-image: url('smash.jpg'); }
     .hero-slide:nth-child(2) { background-image: url('hao4.jpg'); animation-delay: 0.5s; }
     .hero-slide:nth-child(3) { background-image: url('web2.jpg'); animation-delay: 1s; }
@@ -297,7 +301,6 @@
     }
     .product-card:hover .product-info {
       background: linear-gradient(to top, rgba(0,0,0,0.95) 75%, rgba(0,0,0,0.2));
-      justify-content: flex-end;
     }
     .product-cat {
       font-size: 10px; letter-spacing: 3px; color: var(--gold);
@@ -315,8 +318,6 @@
       opacity: 0;
     }
     .product-card:hover .product-desc { max-height: 130px; opacity: 1; }
-
-    /* Product quote button */
     .product-quote-btn {
       display: block;
       margin-top: 14px;
@@ -338,9 +339,7 @@
       transition: opacity 0.35s ease 0.1s, max-height 0.4s ease, background 0.2s, padding 0.4s ease;
     }
     .product-card:hover .product-quote-btn {
-      opacity: 1;
-      max-height: 50px;
-      padding: 10px 0;
+      opacity: 1; max-height: 50px; padding: 10px 0;
     }
     .product-quote-btn:hover { background: var(--gold-lt); }
 
@@ -353,7 +352,6 @@
     .works-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: auto;
       gap: 4px;
     }
     .work-item {
@@ -402,8 +400,7 @@
     .service-card::after {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(180deg, rgba(13,13,13,0.55) 0%, rgba(13,13,13,0.88) 65%, rgba(13,13,13,0.96) 100%);
-      transition: background 0.4s;
-      z-index: 0;
+      transition: background 0.4s; z-index: 0;
     }
     .service-card:hover::after {
       background: linear-gradient(180deg, rgba(13,13,13,0.35) 0%, rgba(13,13,13,0.8) 60%, rgba(13,13,13,0.95) 100%);
@@ -412,8 +409,7 @@
       content: ''; position: absolute;
       top: 0; left: 0; right: 0; height: 0;
       background: var(--gold); opacity: 0.06;
-      transition: height 0.4s;
-      z-index: 1;
+      transition: height 0.4s; z-index: 1;
     }
     .service-card:hover { border-color: var(--gold); }
     .service-card:hover::before { height: 100%; }
@@ -426,10 +422,7 @@
       line-height: 1; margin-bottom: 20px;
     }
     .service-icon { font-size: 32px; margin-bottom: 16px; }
-    .service-name {
-      font-size: 18px; font-weight: 700;
-      margin-bottom: 12px; letter-spacing: 0.5px;
-    }
+    .service-name { font-size: 18px; font-weight: 700; margin-bottom: 12px; letter-spacing: 0.5px; }
     .service-desc { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.7; }
 
     /* ── WHY US ── */
@@ -506,11 +499,91 @@
     }
     .btn-submit:hover { background: var(--gold-lt); transform: translateY(-2px); }
     .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .form-status {
-      font-size: 13px; color: var(--gold); min-height: 18px;
-      letter-spacing: 0.5px;
-    }
+    .form-status { font-size: 13px; color: var(--gold); min-height: 18px; letter-spacing: 0.5px; }
     .form-status.error { color: #e57373; }
+
+    /* ── ONGOING PROJECTS PAGE ── */
+    #page-ongoing { padding-top: 100px; min-height: 100vh; background: var(--dark); }
+    .ongoing-hero {
+      background: var(--dark2);
+      padding: 80px 80px 60px;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .ongoing-hero .section-eyebrow { margin-bottom: 14px; }
+    .ongoing-hero .section-title { margin-bottom: 16px; }
+    .ongoing-hero p { font-size: 15px; color: rgba(255,255,255,0.55); max-width: 580px; line-height: 1.75; }
+    .ongoing-projects-section { padding: 80px 80px; }
+    .ongoing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+    }
+    .ongoing-item {
+      position: relative; overflow: hidden;
+      cursor: pointer; background: var(--dark3);
+    }
+    .ongoing-item::before {
+      content: ''; display: block;
+      padding-top: calc(688 / 703 * 100%);
+    }
+    .ongoing-item img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+      display: block;
+      transition: transform 0.55s ease, filter 0.4s ease;
+      filter: brightness(0.82);
+    }
+    .ongoing-item:hover img { transform: scale(1.06); filter: brightness(0.45); }
+    .ongoing-item-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 28px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 35%, transparent 75%);
+      z-index: 2; transition: background 0.4s;
+    }
+    .ongoing-item:hover .ongoing-item-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.92) 55%, rgba(0,0,0,0.15) 100%);
+    }
+    .ongoing-item-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 11px; letter-spacing: 3px;
+      color: var(--gold); margin-bottom: 6px; opacity: 0.85;
+    }
+    .ongoing-item-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px; letter-spacing: 1px;
+      color: var(--white); line-height: 1.1;
+    }
+    .ongoing-item-expand {
+      margin-top: 10px;
+      font-size: 11px; letter-spacing: 2px;
+      color: var(--gold); text-transform: uppercase;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .ongoing-item:hover .ongoing-item-expand { opacity: 1; transform: translateY(0); }
+    .ongoing-expand-icon {
+      position: absolute; top: 20px; right: 20px;
+      width: 40px; height: 40px;
+      border: 1.5px solid rgba(201,168,76,0.5);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: var(--gold);
+      opacity: 0; transition: opacity 0.3s ease; z-index: 3;
+    }
+    .ongoing-item:hover .ongoing-expand-icon { opacity: 1; }
+    .ongoing-cta {
+      margin-top: 60px; padding: 48px 52px;
+      background: var(--dark3);
+      border: 1px solid rgba(201,168,76,0.15);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 32px; flex-wrap: wrap;
+    }
+    .ongoing-cta-text h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px; letter-spacing: 1px; color: var(--white); margin-bottom: 8px;
+    }
+    .ongoing-cta-text p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.65; max-width: 480px; }
 
     /* ── FOOTER ── */
     footer {
@@ -524,15 +597,9 @@
     }
     .footer-brand .nav-logo { margin-bottom: 18px; cursor: default; }
     .footer-brand p { font-size: 13px; color: var(--text-muted); line-height: 1.75; }
-    .footer-col h4 {
-      font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 18px;
-    }
+    .footer-col h4 { font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-col ul li a {
-      text-decoration: none; font-size: 13px; color: var(--text-muted);
-      transition: color 0.2s;
-    }
+    .footer-col ul li a { text-decoration: none; font-size: 13px; color: var(--text-muted); transition: color 0.2s; cursor: pointer; }
     .footer-col ul li a:hover { color: var(--white); }
     .footer-bottom {
       border-top: 1px solid rgba(255,255,255,0.06);
@@ -547,8 +614,7 @@
     .lightbox {
       display: none; position: fixed; inset: 0; z-index: 999;
       background: rgba(0,0,0,0.94);
-      align-items: center; justify-content: center;
-      padding: 20px;
+      align-items: center; justify-content: center; padding: 20px;
     }
     .lightbox.open { display: flex; }
     .lightbox img { max-width: 90vw; max-height: 86vh; object-fit: contain; }
@@ -561,22 +627,15 @@
 
     /* ── PRODUCT QUOTE MODAL ── */
     .quote-modal-overlay {
-      display: none;
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,0.88);
-      backdrop-filter: blur(6px);
-      align-items: center; justify-content: center;
-      padding: 20px;
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.88); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; padding: 20px;
     }
     .quote-modal-overlay.open { display: flex; }
     .quote-modal {
-      background: var(--dark2);
-      border: 1px solid rgba(201,168,76,0.25);
-      width: 100%; max-width: 580px;
-      max-height: 90vh;
-      overflow-y: auto;
-      position: relative;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      background: var(--dark2); border: 1px solid rgba(201,168,76,0.25);
+      width: 100%; max-width: 580px; max-height: 90vh; overflow-y: auto;
+      position: relative; box-shadow: 0 30px 80px rgba(0,0,0,0.6);
       animation: modalSlide 0.35s ease;
     }
     @keyframes modalSlide {
@@ -584,66 +643,42 @@
       to   { opacity: 1; transform: translateY(0); }
     }
     .quote-modal-header {
-      background: var(--dark3);
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-      padding: 28px 32px 24px;
-      position: relative;
+      background: var(--dark3); border-bottom: 1px solid rgba(201,168,76,0.15);
+      padding: 28px 32px 24px; position: relative;
     }
     .quote-modal-eyebrow {
       font-size: 10px; letter-spacing: 3px; color: var(--gold);
       text-transform: uppercase; margin-bottom: 8px;
       display: flex; align-items: center; gap: 10px;
     }
-    .quote-modal-eyebrow::before {
-      content: ''; width: 24px; height: 1px; background: var(--gold);
-    }
-    .quote-modal-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 32px; letter-spacing: 1px; color: var(--white);
-      line-height: 1;
-    }
+    .quote-modal-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+    .quote-modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 1px; color: var(--white); line-height: 1; }
     .quote-modal-product {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 6px 14px;
-      background: rgba(201,168,76,0.1);
-      border: 1px solid rgba(201,168,76,0.3);
-      font-size: 12px; color: var(--gold);
-      letter-spacing: 1px;
+      display: inline-block; margin-top: 10px; padding: 6px 14px;
+      background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);
+      font-size: 12px; color: var(--gold); letter-spacing: 1px;
     }
     .quote-modal-close {
       position: absolute; top: 20px; right: 24px;
       background: none; border: none; cursor: pointer;
-      color: rgba(255,255,255,0.4); font-size: 26px; line-height: 1;
-      transition: color 0.2s;
+      color: rgba(255,255,255,0.4); font-size: 26px; line-height: 1; transition: color 0.2s;
     }
     .quote-modal-close:hover { color: var(--gold); }
     .quote-modal-body { padding: 28px 32px 32px; }
     .quote-product-summary {
-      background: var(--dark3);
-      border-left: 3px solid var(--gold);
-      padding: 14px 18px;
-      margin-bottom: 24px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.65;
+      background: var(--dark3); border-left: 3px solid var(--gold);
+      padding: 14px 18px; margin-bottom: 24px;
+      font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.65;
     }
-    .quote-product-summary strong {
-      display: block;
-      color: var(--white);
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
+    .quote-product-summary strong { display: block; color: var(--white); font-size: 14px; margin-bottom: 4px; }
     .quote-form { display: flex; flex-direction: column; gap: 16px; }
     .quote-form .form-group label { color: rgba(255,255,255,0.5); }
     .quote-form .form-group input,
     .quote-form .form-group textarea {
-      background: var(--dark);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: var(--dark); border: 1px solid rgba(255,255,255,0.1);
       color: var(--white); padding: 13px 16px;
       font-family: 'Inter', sans-serif; font-size: 14px;
-      outline: none; transition: border-color 0.2s;
-      resize: vertical; width: 100%;
+      outline: none; transition: border-color 0.2s; resize: vertical; width: 100%;
     }
     .quote-form .form-group input:focus,
     .quote-form .form-group textarea:focus { border-color: var(--gold); }
@@ -653,18 +688,11 @@
       padding: 15px; border: none; cursor: pointer;
       font-size: 12px; font-weight: 700; letter-spacing: 2px;
       text-transform: uppercase; width: 100%;
-      transition: background 0.2s, transform 0.15s;
-      margin-top: 4px;
+      transition: background 0.2s, transform 0.15s; margin-top: 4px;
     }
     .quote-submit-btn:hover { background: var(--gold-lt); transform: translateY(-1px); }
-    .quote-form-note {
-      font-size: 11px; color: rgba(255,255,255,0.3);
-      text-align: center; margin-top: 8px; line-height: 1.5;
-    }
-    .quote-status {
-      font-size: 13px; color: var(--gold);
-      min-height: 16px; letter-spacing: 0.5px;
-    }
+    .quote-form-note { font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; margin-top: 8px; line-height: 1.5; }
+    .quote-status { font-size: 13px; color: var(--gold); min-height: 16px; letter-spacing: 0.5px; }
     .quote-status.error { color: #e57373; }
 
     /* ── ANIMATIONS ── */
@@ -676,10 +704,11 @@
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .why-grid { grid-template-columns: repeat(2, 1fr); }
       .why-item:nth-child(2) { border-right: none; }
+      .ongoing-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 1024px) {
       nav { padding: 16px 32px; }
-      .nav-links { gap: 24px; }
+      .nav-links { gap: 20px; }
       section { padding: 80px 32px; }
       #about, #contact { grid-template-columns: 1fr; gap: 48px; }
       .hero-content { padding: 0 32px; }
@@ -688,6 +717,8 @@
       .works-grid { grid-template-columns: repeat(3, 1fr); }
       .work-item:nth-child(1) { grid-column: span 2; }
       .work-item:nth-child(5) { grid-column: span 1; }
+      .ongoing-hero { padding: 70px 32px 50px; }
+      .ongoing-projects-section { padding: 60px 32px; }
     }
     @media (max-width: 860px) {
       .nav-links { display: none; }
@@ -695,14 +726,11 @@
       .nav-links.mobile-open {
         display: flex; position: fixed; top: 0; right: 0; bottom: 0;
         width: min(78vw, 320px);
-        background: rgba(10,10,10,0.98);
-        backdrop-filter: blur(14px);
+        background: rgba(10,10,10,0.98); backdrop-filter: blur(14px);
         flex-direction: column; align-items: flex-start;
-        padding: 110px 36px 36px;
-        gap: 28px;
+        padding: 110px 36px 36px; gap: 28px;
         border-left: 1px solid rgba(201,168,76,0.2);
-        z-index: 105;
-        animation: slideIn 0.3s ease;
+        z-index: 105; animation: slideIn 0.3s ease;
       }
       @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
       .nav-links.mobile-open a { font-size: 15px; }
@@ -710,6 +738,7 @@
       .quote-form-row { grid-template-columns: 1fr; }
       .quote-modal { max-width: 96vw; }
       .quote-modal-header, .quote-modal-body { padding-left: 22px; padding-right: 22px; }
+      .ongoing-cta { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 768px) {
       nav { padding: 14px 18px; }
@@ -718,8 +747,7 @@
       .hero-title { font-size: clamp(40px, 12vw, 70px); }
       .hero-stats {
         position: static; margin-top: 40px;
-        justify-content: space-between; padding-left: 0; gap: 16px;
-        flex-wrap: wrap;
+        justify-content: space-between; gap: 16px; flex-wrap: wrap;
       }
       .stat-num { font-size: 36px; }
       .services-grid, .why-grid { grid-template-columns: 1fr; }
@@ -735,6 +763,10 @@
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .about-badge { left: 0; bottom: -16px; padding: 14px 20px; }
       .about-badge .badge-num { font-size: 32px; }
+      .ongoing-grid { grid-template-columns: 1fr; }
+      .ongoing-hero { padding: 60px 20px 40px; }
+      .ongoing-projects-section { padding: 48px 20px; }
+      .ongoing-cta { padding: 32px 24px; }
     }
     @media (max-width: 480px) {
       .hero-eyebrow { font-size: 10px; letter-spacing: 2px; }
@@ -755,7 +787,7 @@
 
   <!-- NAV -->
   <nav>
-    <div class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="nav-logo" onclick="showPage('home')">
       <div class="nav-logo-icon">C</div>
       <div class="nav-logo-text">
         <span class="nav-logo-name">CROWFIT</span>
@@ -763,13 +795,15 @@
       </div>
     </div>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#about" onclick="closeMobileNav()">About</a></li>
-      <li><a href="#products" onclick="closeMobileNav()">Products</a></li>
-      <li><a href="#works" onclick="closeMobileNav()">Our Works</a></li>
-      <li><a href="#services" onclick="closeMobileNav()">Services</a></li>
-      <li><a href="#contact" onclick="closeMobileNav()">Contact</a></li>
+      <li><a onclick="showPage('home'); closeMobileNav();" id="nav-home" class="nav-active">Home</a></li>
+      <li><a href="#about" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('about');">About</a></li>
+      <li><a href="#products" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('products');">Products</a></li>
+      <li><a href="#works" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('works');">Our Works</a></li>
+      <li><a onclick="showPage('ongoing'); closeMobileNav();" id="nav-ongoing">Ongoing Projects</a></li>
+      <li><a href="#services" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('services');">Services</a></li>
+      <li><a href="#contact" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('contact');">Contact</a></li>
     </ul>
-    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+    <button class="nav-cta" onclick="showPage('home'); scrollAfterNav('contact');">
       Get a Quote
     </button>
     <button class="nav-toggle" id="navToggle" onclick="toggleMobileNav()" aria-label="Menu">
@@ -777,572 +811,579 @@
     </button>
   </nav>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-slide active"></div>
-    <div class="hero-slide"></div>
-    <div class="hero-slide"></div>
-    <div class="hero-slide"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">Building &amp; Construction Excellence</div>
-      <h1 class="hero-title">
-        Building<br/>
-        <span>Nairobi's</span><br/>
-        Future
-      </h1>
-      <p class="hero-desc">
-        Crowfit East Africa Ltd delivers world-class interior and exterior construction solutions — from lavish architectural designs to precision-crafted building materials.
-      </p>
-      <div class="hero-actions">
-        <a href="#works" class="btn-primary">View Our Works</a>
-        <a href="#contact" class="btn-outline">Get a Quote</a>
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="stat">
-        <div class="stat-num">12+</div>
-        <div class="stat-label">Years Active</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">500+</div>
-        <div class="stat-label">Projects Done</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">4</div>
-        <div class="stat-label">Locations</div>
-      </div>
-    </div>
-    <div class="scroll-hint">
-      <div class="scroll-line"></div>
-      Scroll
-    </div>
-  </section>
+  <!-- ═══════════════════════════
+       HOME PAGE
+  ════════════════════════════ -->
+  <div id="page-home" class="page active">
 
-  <!-- ABOUT -->
-  <section id="about" class="reveal">
-    <div class="about-text">
-      <div class="section-eyebrow">Who We Are</div>
-      <h2 class="section-title">Craftsmanship<br/><span>Meets Vision</span></h2>
-      <p>
-        Crowfit East Africa Ltd is a leading building and construction company headquartered in Nairobi, Kenya. We specialise in both interior and exterior lavish designs, delivering spaces that are built to last and crafted to impress.
-      </p>
-      <p>
-        From premium paving solutions and fencing to custom gutters and iron sheet roofing, we supply and install high-quality materials that define modern construction across East Africa.
-      </p>
-      <div class="about-features">
-        <div class="feature-item">
-          <span class="feature-icon">🏗️</span>
-          <div>
-            <div class="feature-title">End-to-End Construction</div>
-            <div class="feature-desc">From foundations to finishing touches — we manage every phase of your project with precision.</div>
-          </div>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">🎨</span>
-          <div>
-            <div class="feature-title">Interior &amp; Exterior Design</div>
-            <div class="feature-desc">Lavish, bespoke design concepts that transform spaces into experiences.</div>
-          </div>
-        </div>
-        <div class="feature-item">
-          <span class="feature-icon">🧱</span>
-          <div>
-            <div class="feature-title">Premium Materials Supply</div>
-            <div class="feature-desc">We manufacture and supply top-grade building materials throughout the Nairobi region.</div>
-          </div>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-slide active"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-slide"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">Building &amp; Construction Excellence</div>
+        <h1 class="hero-title">
+          Building<br/>
+          <span>Nairobi's</span><br/>
+          Future
+        </h1>
+        <p class="hero-desc">
+          Crowfit East Africa Ltd delivers world-class interior and exterior construction solutions — from lavish architectural designs to precision-crafted building materials.
+        </p>
+        <div class="hero-actions">
+          <a class="btn-primary" onclick="scrollAfterNav('works')">View Our Works</a>
+          <a class="btn-outline" onclick="scrollAfterNav('contact')">Get a Quote</a>
         </div>
       </div>
-    </div>
-    <div class="about-visual reveal">
-      <img src="proof10.jpg" alt="Crowfit Construction Site" />
-      <div class="about-badge">
-        <div class="badge-num">10+</div>
-        <div class="badge-text">Years of Excellence</div>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Years Active</div></div>
+        <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Projects Done</div></div>
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Locations</div></div>
       </div>
-    </div>
-  </section>
+      <div class="scroll-hint"><div class="scroll-line"></div>Scroll</div>
+    </section>
 
-  <!-- PRODUCTS -->
-  <section id="products">
-    <div style="text-align:center; margin-bottom: 0;">
-      <div class="section-eyebrow" style="justify-content:center;">What We Produce</div>
-      <h2 class="section-title">Our <span>Products</span></h2>
-      <p style="color:rgba(255,255,255,0.5); font-size:15px; max-width:560px; margin:0 auto 0; line-height:1.7;">
-        Precision-manufactured and carefully sourced building materials crafted for durability, aesthetics, and performance.
-      </p>
-    </div>
-    <div class="products-grid reveal">
-
-      <div class="product-card">
-        <img src="quad.jpg" alt="Quad Paving" />
-        <div class="product-info">
-          <div class="product-cat">Paving Solutions</div>
-          <div class="product-name">Quad Blocks</div>
-          <div class="product-desc">Heavy-duty interlocking quad blocks engineered for driveways, car parks and commercial pavements. Superior load-bearing capacity with a clean geometric finish.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Quad Blocks', 'Paving Solutions', 'Typically quoted per square metre (m²). Ideal for driveways, car parks and commercial paving areas.', 'quad.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="cabros.jpg" alt="Cabros Paving" />
-        <div class="product-info">
-          <div class="product-cat">Paving Solutions</div>
-          <div class="product-name">Cabros</div>
-          <div class="product-desc">Classic cabro blocks — the gold standard for Kenyan paving. Suitable for pedestrian walkways, estate roads and commercial yards with excellent slip resistance.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Cabros', 'Paving Solutions', 'Typically quoted per square metre (m²). Common for estate roads, walkways and commercial yards.', 'cabros.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="paving.jpg" alt="Paving Slabs" />
-        <div class="product-info">
-          <div class="product-cat">Outdoor Finishes</div>
-          <div class="product-name">Paving Slabs</div>
-          <div class="product-desc">Smooth and textured paving slabs for patios, pool surrounds and garden paths. Available in various sizes and finishes to suit every design aesthetic.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Paving Slabs', 'Outdoor Finishes', 'Quoted per square metre (m²) or per slab unit. Available in multiple sizes and finishes.', 'paving.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="fencing.jpg" alt="Fencing Posts" />
-        <div class="product-info">
-          <div class="product-cat">Security &amp; Boundaries</div>
-          <div class="product-name">Fencing Posts</div>
-          <div class="product-desc">Robust precast concrete fencing posts designed for perimeter walls, boundary lines and security fencing. Long-lasting and weather resistant.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Fencing Posts', 'Security & Boundaries', 'Quoted per linear metre (lm) of fencing or per post unit. Standard post heights: 1.2m, 1.5m, 1.8m.', 'fencing.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="gutters.jpg" alt="Gutters" />
-        <div class="product-info">
-          <div class="product-cat">Drainage Systems</div>
-          <div class="product-name">Gutters</div>
-          <div class="product-desc">Professionally crafted drainage gutters for efficient rainwater management. Prevents erosion and structural water damage with clean, durable channelling.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Gutters', 'Drainage Systems', 'Quoted per linear metre (lm). Please indicate roof area or building dimensions for accurate sizing.', 'gutters.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="decla.jpg" alt="Decla Iron Sheets" />
-        <div class="product-info">
-          <div class="product-cat">Roofing</div>
-          <div class="product-name">Decla Iron Sheets</div>
-          <div class="product-desc">Premium Decla profile iron sheets for residential and commercial roofing. High-tensile steel with anti-rust treatment — built for East Africa's demanding climate.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Decla Iron Sheets', 'Roofing', 'Quoted per sheet or per square metre (m²) of roof coverage. Gauge options: 28g, 30g, 32g. Please specify roof pitch and area.', 'decla.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="roofing.jpg" alt="Roofing Insulators" />
-        <div class="product-info">
-          <div class="product-cat">Roofing</div>
-          <div class="product-name">Roofing Insulators</div>
-          <div class="product-desc">High-performance thermal insulation sheets that reduce heat transfer and noise, keeping interiors comfortable all year round.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Roofing Insulators', 'Roofing', 'Quoted per square metre (m²) of roof area. Please specify the total roof area and type of roofing being used.', 'roofing.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="woodendoor.jpg" alt="Wooden Doors" />
-        <div class="product-info">
-          <div class="product-cat">Joinery</div>
-          <div class="product-name">Wooden Doors</div>
-          <div class="product-desc">Solid, expertly finished wooden doors combining timeless craftsmanship with lasting durability for homes and offices.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Wooden Doors', 'Joinery', 'Quoted per door unit. Standard sizes: 2100×900mm, 2100×800mm, custom sizes available. Please state quantity and door type (interior/exterior).', 'woodendoor.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="web2.jpg" alt="Sinks" />
-        <div class="product-info">
-          <div class="product-cat">Sanitary Fittings</div>
-          <div class="product-name">Sinks</div>
-          <div class="product-desc">Stylish, durable sinks for kitchens and bathrooms, designed for everyday performance with a refined modern finish.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Sinks', 'Sanitary Fittings', 'Quoted per unit. Available in single bowl, double bowl and undermount configurations. Specify kitchen or bathroom use.', 'web2.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="shower.jpg" alt="Modern Showerheads" />
-        <div class="product-info">
-          <div class="product-cat">Sanitary Fittings</div>
-          <div class="product-name">Modern Showerheads</div>
-          <div class="product-desc">Sleek, water-efficient showerheads engineered for a premium bathing experience with consistent, even water flow.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Modern Showerheads', 'Sanitary Fittings', 'Quoted per unit. Specify quantity and whether overhead rain shower, handheld or combo set is preferred.', 'shower.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="Toilets.jpg" alt="Modern Toilets" />
-        <div class="product-info">
-          <div class="product-cat">Sanitary Fittings</div>
-          <div class="product-name">Modern Toilets</div>
-          <div class="product-desc">Contemporary, water-saving toilet suites built for hygiene, comfort and long-term reliability in any bathroom setting.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Modern Toilets', 'Sanitary Fittings', 'Quoted per unit (WC suite). Specify quantity and preferred type: close-coupled, wall-hung or back-to-wall.', 'Toilets.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="sijui3.png" alt="Sheeting Rolls" />
-        <div class="product-info">
-          <div class="product-cat">Building Materials</div>
-          <div class="product-name">Sheeting Rolls</div>
-          <div class="product-desc">Durable membrane and sheeting rolls used for waterproofing, damp-proofing and general construction protection.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Sheeting Rolls', 'Building Materials', 'Quoted per roll or per square metre (m²). Please indicate application: waterproofing, DPC (damp-proof course) or general site protection.', 'sijui3.png')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="sijui.jpg" alt="Roofing Ventilation" />
-        <div class="product-info">
-          <div class="product-cat">Roofing</div>
-          <div class="product-name">Roofing Ventilation</div>
-          <div class="product-desc">Engineered ventilation systems that regulate roof-space airflow, reducing heat build-up and extending roof lifespan.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Roofing Ventilation', 'Roofing', 'Quoted per unit (ridge vent or tile vent). Provide total roof area and ridge length for accurate ventilation calculation.', 'sijui.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="Tiles.jpg" alt="Tiles" />
-        <div class="product-info">
-          <div class="product-cat">Outdoor Finishes</div>
-          <div class="product-name">Tiles</div>
-          <div class="product-desc">A wide range of floor and wall tiles in varied finishes and textures, suited to both residential and commercial spaces.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Tiles', 'Outdoor Finishes', 'Quoted per square metre (m²). Please indicate area to be tiled, tile size preference and whether for floor or wall application.', 'Tiles.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="sijui2.jpg" alt="Curtain Rod Bucket" />
-        <div class="product-info">
-          <div class="product-cat">Interior Fittings</div>
-          <div class="product-name">Curtain Rod Bucket</div>
-          <div class="product-desc">Sturdy curtain rod bracket and bucket fittings designed for secure, lasting installation in any room.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Curtain Rod Bucket', 'Interior Fittings', 'Quoted per set. Please specify number of windows/rooms and rod diameter needed.', 'sijui2.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="sijui4.jpg" alt="Crown Moulding" />
-        <div class="product-info">
-          <div class="product-cat">Interior Fittings</div>
-          <div class="product-name">Crown Moulding</div>
-          <div class="product-desc">Elegant decorative moulding that adds a refined, finished edge where walls and ceilings meet.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Crown Moulding', 'Interior Fittings', 'Quoted per linear metre (lm). Please provide the total perimeter of rooms requiring moulding installation.', 'sijui4.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="sijui5.jpg" alt="Drawer Slides" />
-        <div class="product-info">
-          <div class="product-cat">Interior Fittings</div>
-          <div class="product-name">Drawer Slides</div>
-          <div class="product-desc">Smooth, heavy-duty drawer slide hardware built for long-term durability in cabinetry and fitted furniture.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Drawer Slides', 'Interior Fittings', 'Quoted per pair (one drawer). Please specify quantity of drawers and slide length required (e.g. 300mm, 400mm, 500mm).', 'sijui5.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <img src="sijui6.jpg" alt="Metal Building Frame" />
-        <div class="product-info">
-          <div class="product-cat">Structural Materials</div>
-          <div class="product-name">Metal Building Frame</div>
-          <div class="product-desc">High-strength steel framing systems engineered for structural integrity across residential and commercial builds.</div>
-          <button class="product-quote-btn" onclick="openQuoteModal(event, 'Metal Building Frame', 'Structural Materials', 'Quoted per metre run or as a full structural package. Please provide building floor plan dimensions and number of storeys.', 'sijui6.jpg')">Get Free Quote →</button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- WORKS -->
-  <section id="works">
-    <div class="section-eyebrow">Portfolio</div>
-    <h2 class="section-title">Works We <span>Have Done</span></h2>
-    <p class="works-subtitle">A selection of completed projects spanning residential compounds, commercial estates, roads and public infrastructure across Nairobi and beyond.</p>
-    <div class="works-grid reveal">
-      <div class="work-item" onclick="openLightbox('web1.jpg')">
-        <img src="web1.jpg" alt="Project 1" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('web2.jpg')">
-        <img src="web2.jpg" alt="Project 2" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('smash.jpg')">
-        <img src="smash.jpg" alt="Project 3" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('proof1.jpg')">
-        <img src="proof1.png" alt="Project 4" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('proof2.jpg')">
-        <img src="proof2.png" alt="Project 5" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('proof3.jpg')">
-        <img src="proof3.jpg" alt="Project 6" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('proof4.jpg')">
-        <img src="proof4.jpg" alt="Project 7" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('proof5.jpg')">
-        <img src="proof5.jpg" alt="Project 8" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('proof6.jpg')">
-        <img src="reside.jpg" alt="Project 9" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('proof7.jpg')">
-        <img src="proof7.jpg" alt="Project 10" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('proof8.jpg')">
-        <img src="proof8.jpg" alt="Project 11" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('proof9.jpg')">
-        <img src="guters.jpg" alt="Project 12" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('proof10.jpg')">
-        <img src="proof10.jpg" alt="Project 13" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('proof11.jpg')">
-        <img src="proof11.jpg" alt="Project 14" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('hao.png')">
-        <img src="hao.png" alt="Project 15" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('hao1.jpg')">
-        <img src="hao1.jpg" alt="Project 16" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('hao2.jpg')">
-        <img src="hao2.jpg" alt="Project 17" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('hao3.jpg')">
-        <img src="hao3.jpg" alt="Project 18" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-      <div class="work-item" onclick="openLightbox('hao4.jpg')">
-        <img src="hao4.jpg" alt="Project 19" />
-        <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <section id="services">
-    <div class="section-eyebrow">What We Do</div>
-    <h2 class="section-title">Our <span>Services</span></h2>
-    <div class="services-grid reveal">
-      <div class="service-card" style="background-image: url('hao4.jpg');">
-        <div class="service-num">01</div>
-        <div class="service-icon"></div>
-        <div class="service-name">Residential Construction</div>
-        <div class="service-desc">Full build and fit-out of residential properties — from bungalows to gated estates. We bring architectural vision to life with precision craftsmanship.</div>
-      </div>
-      <div class="service-card" style="background-image: url('reside.jpg');">
-        <div class="service-num">02</div>
-        <div class="service-icon"></div>
-        <div class="service-name">Commercial Construction</div>
-        <div class="service-desc">Offices, retail spaces, warehouses and commercial complexes built to international standards and completed on schedule.</div>
-      </div>
-      <div class="service-card" style="background-image: url('web2.jpg');">
-        <div class="service-num">03</div>
-        <div class="service-icon"></div>
-        <div class="service-name">Interior Design &amp; Fit-out</div>
-        <div class="service-desc">Lavish interior transformations — ceiling works, custom tiling, fitted kitchens and luxury finishes that elevate every room.</div>
-      </div>
-      <div class="service-card" style="background-image: url('landscape.jpg');">
-        <div class="service-num">04</div>
-        <div class="service-icon"></div>
-        <div class="service-name">Paving &amp; Landscaping</div>
-        <div class="service-desc">Driveways, parking bays, estate roads and decorative garden paving laid with expert precision using our own manufactured materials.</div>
-      </div>
-      <div class="service-card" style="background-image: url('smash.jpg');">
-        <div class="service-num">05</div>
-        <div class="service-icon"></div>
-        <div class="service-name">Fencing &amp; Perimeter Works</div>
-        <div class="service-desc">Secure and attractive perimeter solutions — precast walls, concrete post fencing, barbed wire and electric fence integration.</div>
-      </div>
-      <div class="service-card" style="background-image: url('web5.jpg');">
-        <div class="service-num">06</div>
-        <div class="service-icon"></div>
-        <div class="service-name">Roofing &amp; Drainage</div>
-        <div class="service-desc">Complete roofing systems using Decla iron sheets and custom drainage channels — protecting your investment from Nairobi's rains.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY US -->
-  <section id="why">
-    <div class="section-eyebrow">Why Choose Us</div>
-    <h2 class="section-title">Built on <span style="color: rgba(13,13,13,0.55);">Trust</span></h2>
-    <div class="why-grid reveal">
-      <div class="why-item">
-        <div class="why-num">01</div>
-        <div class="why-title">Local Expertise</div>
-        <div class="why-desc">Deep knowledge of Nairobi's terrain, regulations and climate ensures every project is built for the local environment.</div>
-      </div>
-      <div class="why-item">
-        <div class="why-num">02</div>
-        <div class="why-title">Quality Materials</div>
-        <div class="why-desc">We manufacture our own building materials, giving us full control over quality at every stage of construction.</div>
-      </div>
-      <div class="why-item">
-        <div class="why-num">03</div>
-        <div class="why-title">On-Time Delivery</div>
-        <div class="why-desc">Our disciplined project management approach means your construction finishes when promised — without compromise.</div>
-      </div>
-      <div class="why-item">
-        <div class="why-num">04</div>
-        <div class="why-title">After-Sales Support</div>
-        <div class="why-desc">We stand behind every project with dedicated after-sales service and maintenance partnerships for total peace of mind.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-info reveal">
-      <div class="section-eyebrow">Get In Touch</div>
-      <h2 class="section-title">Let's <span>Build</span><br/>Together</h2>
-      <p>Ready to start your next project? Reach out to our team across any of our Nairobi locations and we'll get back to you promptly.</p>
-      <div class="contact-detail">
-        <div class="contact-item">
-          <div class="contact-icon">📍</div>
-          <div>
-            <div class="contact-item-label">Our Locations</div>
-            <div class="contact-item-val">Enterprise Rd · Mombasa Rd · Athi River · City Stadium, Nairobi</div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">📞</div>
-          <div>
-            <div class="contact-item-label">Phone</div>
-            <div class="contact-item-val">
-              <a href="tel:+254722584860">0722 584 860</a><br/>
-              <a href="tel:+254732026085">0732 026 085</a>
+    <!-- ABOUT -->
+    <section id="about" class="reveal">
+      <div class="about-text">
+        <div class="section-eyebrow">Who We Are</div>
+        <h2 class="section-title">Craftsmanship<br/><span>Meets Vision</span></h2>
+        <p>Crowfit East Africa Ltd is a leading building and construction company headquartered in Nairobi, Kenya. We specialise in both interior and exterior lavish designs, delivering spaces that are built to last and crafted to impress.</p>
+        <p>From premium paving solutions and fencing to custom gutters and iron sheet roofing, we supply and install high-quality materials that define modern construction across East Africa.</p>
+        <div class="about-features">
+          <div class="feature-item">
+            <span class="feature-icon">🏗️</span>
+            <div>
+              <div class="feature-title">End-to-End Construction</div>
+              <div class="feature-desc">From foundations to finishing touches — we manage every phase of your project with precision.</div>
             </div>
           </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon">✉️</div>
-          <div>
-            <div class="contact-item-label">Email</div>
-            <div class="contact-item-val">
-              <a href="mailto:crowfitealtd@gmail.com">crowfitealtd@gmail.com</a><br/>
-              <a href="mailto:washington.mangeli@gmail.com">washington.mangeli@gmail.com</a>
+          <div class="feature-item">
+            <span class="feature-icon">🎨</span>
+            <div>
+              <div class="feature-title">Interior &amp; Exterior Design</div>
+              <div class="feature-desc">Lavish, bespoke design concepts that transform spaces into experiences.</div>
+            </div>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🧱</span>
+            <div>
+              <div class="feature-title">Premium Materials Supply</div>
+              <div class="feature-desc">We manufacture and supply top-grade building materials throughout the Nairobi region.</div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <form class="contact-form reveal" id="contactForm">
-      <div class="section-eyebrow" style="padding-top:0;">Send a Message</div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" id="cf-name" name="name" placeholder="John Kamau" required />
-        </div>
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="tel" id="cf-phone" name="phone" placeholder="0700 000 000" />
+      <div class="about-visual reveal">
+        <img src="proof10.jpg" alt="Crowfit Construction Site" />
+        <div class="about-badge">
+          <div class="badge-num">10+</div>
+          <div class="badge-text">Years of Excellence</div>
         </div>
       </div>
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" id="cf-email" name="email" placeholder="you@example.com" required />
-      </div>
-      <div class="form-group">
-        <label>Service Needed</label>
-        <select id="cf-service" name="service">
-          <option value="">Select a service…</option>
-          <option>Residential Construction</option>
-          <option>Commercial Construction</option>
-          <option>Interior Design &amp; Fit-out</option>
-          <option>Paving &amp; Landscaping</option>
-          <option>Fencing &amp; Perimeter Works</option>
-          <option>Roofing &amp; Drainage</option>
-          <option>Materials Supply Only</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Your Message</label>
-        <textarea rows="5" id="cf-message" name="message" placeholder="Tell us about your project…" required></textarea>
-      </div>
-      <button type="submit" class="btn-submit" id="cf-submit">Send Message →</button>
-      <div class="form-status" id="cf-status"></div>
-    </form>
-  </section>
+    </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="nav-logo">
-          <div class="nav-logo-icon">C</div>
-          <div class="nav-logo-text">
-            <span class="nav-logo-name">CROWFIT</span>
-            <span class="nav-logo-sub">East Africa Ltd</span>
+    <!-- PRODUCTS -->
+    <section id="products">
+      <div style="text-align:center;">
+        <div class="section-eyebrow" style="justify-content:center;">What We Produce</div>
+        <h2 class="section-title">Our <span>Products</span></h2>
+        <p style="color:rgba(255,255,255,0.5); font-size:15px; max-width:560px; margin:0 auto; line-height:1.7;">
+          Precision-manufactured and carefully sourced building materials crafted for durability, aesthetics, and performance.
+        </p>
+      </div>
+      <div class="products-grid reveal">
+        <div class="product-card">
+          <img src="quad.jpg" alt="Quad Paving" />
+          <div class="product-info">
+            <div class="product-cat">Paving Solutions</div>
+            <div class="product-name">Quad Blocks</div>
+            <div class="product-desc">Heavy-duty interlocking quad blocks engineered for driveways, car parks and commercial pavements. Superior load-bearing capacity with a clean geometric finish.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Quad Blocks','Paving Solutions','Typically quoted per square metre (m²). Ideal for driveways, car parks and commercial paving areas.','quad.jpg')">Get Free Quote →</button>
           </div>
         </div>
-        <p>Building and construction specialists for interior and exterior lavish designs across Nairobi and East Africa. Quality craftsmanship, on every project.</p>
+        <div class="product-card">
+          <img src="cabros.jpg" alt="Cabros Paving" />
+          <div class="product-info">
+            <div class="product-cat">Paving Solutions</div>
+            <div class="product-name">Cabros</div>
+            <div class="product-desc">Classic cabro blocks — the gold standard for Kenyan paving. Suitable for pedestrian walkways, estate roads and commercial yards with excellent slip resistance.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Cabros','Paving Solutions','Typically quoted per square metre (m²). Common for estate roads, walkways and commercial yards.','cabros.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="paving.jpg" alt="Paving Slabs" />
+          <div class="product-info">
+            <div class="product-cat">Outdoor Finishes</div>
+            <div class="product-name">Paving Slabs</div>
+            <div class="product-desc">Smooth and textured paving slabs for patios, pool surrounds and garden paths. Available in various sizes and finishes to suit every design aesthetic.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Paving Slabs','Outdoor Finishes','Quoted per square metre (m²) or per slab unit. Available in multiple sizes and finishes.','paving.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="fencing.jpg" alt="Fencing Posts" />
+          <div class="product-info">
+            <div class="product-cat">Security &amp; Boundaries</div>
+            <div class="product-name">Fencing Posts</div>
+            <div class="product-desc">Robust precast concrete fencing posts designed for perimeter walls, boundary lines and security fencing. Long-lasting and weather resistant.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Fencing Posts','Security & Boundaries','Quoted per linear metre (lm) of fencing or per post unit. Standard post heights: 1.2m, 1.5m, 1.8m.','fencing.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="gutters.jpg" alt="Gutters" />
+          <div class="product-info">
+            <div class="product-cat">Drainage Systems</div>
+            <div class="product-name">Gutters</div>
+            <div class="product-desc">Professionally crafted drainage gutters for efficient rainwater management. Prevents erosion and structural water damage with clean, durable channelling.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Gutters','Drainage Systems','Quoted per linear metre (lm). Please indicate roof area or building dimensions for accurate sizing.','gutters.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="decla.jpg" alt="Decla Iron Sheets" />
+          <div class="product-info">
+            <div class="product-cat">Roofing</div>
+            <div class="product-name">Decla Iron Sheets</div>
+            <div class="product-desc">Premium Decla profile iron sheets for residential and commercial roofing. High-tensile steel with anti-rust treatment — built for East Africa's demanding climate.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Decla Iron Sheets','Roofing','Quoted per sheet or per square metre (m²) of roof coverage. Gauge options: 28g, 30g, 32g. Please specify roof pitch and area.','decla.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="roofing.jpg" alt="Roofing Insulators" />
+          <div class="product-info">
+            <div class="product-cat">Roofing</div>
+            <div class="product-name">Roofing Insulators</div>
+            <div class="product-desc">High-performance thermal insulation sheets that reduce heat transfer and noise, keeping interiors comfortable all year round.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Roofing Insulators','Roofing','Quoted per square metre (m²) of roof area. Please specify the total roof area and type of roofing being used.','roofing.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="woodendoor.jpg" alt="Wooden Doors" />
+          <div class="product-info">
+            <div class="product-cat">Joinery</div>
+            <div class="product-name">Wooden Doors</div>
+            <div class="product-desc">Solid, expertly finished wooden doors combining timeless craftsmanship with lasting durability for homes and offices.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Wooden Doors','Joinery','Quoted per door unit. Standard sizes: 2100×900mm, 2100×800mm, custom sizes available. Please state quantity and door type (interior/exterior).','woodendoor.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="web2.jpg" alt="Sinks" />
+          <div class="product-info">
+            <div class="product-cat">Sanitary Fittings</div>
+            <div class="product-name">Sinks</div>
+            <div class="product-desc">Stylish, durable sinks for kitchens and bathrooms, designed for everyday performance with a refined modern finish.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Sinks','Sanitary Fittings','Quoted per unit. Available in single bowl, double bowl and undermount configurations. Specify kitchen or bathroom use.','web2.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="shower.jpg" alt="Modern Showerheads" />
+          <div class="product-info">
+            <div class="product-cat">Sanitary Fittings</div>
+            <div class="product-name">Modern Showerheads</div>
+            <div class="product-desc">Sleek, water-efficient showerheads engineered for a premium bathing experience with consistent, even water flow.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Modern Showerheads','Sanitary Fittings','Quoted per unit. Specify quantity and whether overhead rain shower, handheld or combo set is preferred.','shower.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="Toilets.jpg" alt="Modern Toilets" />
+          <div class="product-info">
+            <div class="product-cat">Sanitary Fittings</div>
+            <div class="product-name">Modern Toilets</div>
+            <div class="product-desc">Contemporary, water-saving toilet suites built for hygiene, comfort and long-term reliability in any bathroom setting.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Modern Toilets','Sanitary Fittings','Quoted per unit (WC suite). Specify quantity and preferred type: close-coupled, wall-hung or back-to-wall.','Toilets.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="sijui3.png" alt="Sheeting Rolls" />
+          <div class="product-info">
+            <div class="product-cat">Building Materials</div>
+            <div class="product-name">Sheeting Rolls</div>
+            <div class="product-desc">Durable membrane and sheeting rolls used for waterproofing, damp-proofing and general construction protection.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Sheeting Rolls','Building Materials','Quoted per roll or per square metre (m²). Please indicate application: waterproofing, DPC (damp-proof course) or general site protection.','sijui3.png')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="sijui.jpg" alt="Roofing Ventilation" />
+          <div class="product-info">
+            <div class="product-cat">Roofing</div>
+            <div class="product-name">Roofing Ventilation</div>
+            <div class="product-desc">Engineered ventilation systems that regulate roof-space airflow, reducing heat build-up and extending roof lifespan.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Roofing Ventilation','Roofing','Quoted per unit (ridge vent or tile vent). Provide total roof area and ridge length for accurate ventilation calculation.','sijui.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="Tiles.jpg" alt="Tiles" />
+          <div class="product-info">
+            <div class="product-cat">Outdoor Finishes</div>
+            <div class="product-name">Tiles</div>
+            <div class="product-desc">A wide range of floor and wall tiles in varied finishes and textures, suited to both residential and commercial spaces.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Tiles','Outdoor Finishes','Quoted per square metre (m²). Please indicate area to be tiled, tile size preference and whether for floor or wall application.','Tiles.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="sijui2.jpg" alt="Curtain Rod Bucket" />
+          <div class="product-info">
+            <div class="product-cat">Interior Fittings</div>
+            <div class="product-name">Curtain Rod Bucket</div>
+            <div class="product-desc">Sturdy curtain rod bracket and bucket fittings designed for secure, lasting installation in any room.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Curtain Rod Bucket','Interior Fittings','Quoted per set. Please specify number of windows/rooms and rod diameter needed.','sijui2.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="sijui4.jpg" alt="Crown Moulding" />
+          <div class="product-info">
+            <div class="product-cat">Interior Fittings</div>
+            <div class="product-name">Crown Moulding</div>
+            <div class="product-desc">Elegant decorative moulding that adds a refined, finished edge where walls and ceilings meet.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Crown Moulding','Interior Fittings','Quoted per linear metre (lm). Please provide the total perimeter of rooms requiring moulding installation.','sijui4.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="sijui5.jpg" alt="Drawer Slides" />
+          <div class="product-info">
+            <div class="product-cat">Interior Fittings</div>
+            <div class="product-name">Drawer Slides</div>
+            <div class="product-desc">Smooth, heavy-duty drawer slide hardware built for long-term durability in cabinetry and fitted furniture.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Drawer Slides','Interior Fittings','Quoted per pair (one drawer). Please specify quantity of drawers and slide length required (e.g. 300mm, 400mm, 500mm).','sijui5.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <img src="sijui6.jpg" alt="Metal Building Frame" />
+          <div class="product-info">
+            <div class="product-cat">Structural Materials</div>
+            <div class="product-name">Metal Building Frame</div>
+            <div class="product-desc">High-strength steel framing systems engineered for structural integrity across residential and commercial builds.</div>
+            <button class="product-quote-btn" onclick="openQuoteModal(event,'Metal Building Frame','Structural Materials','Quoted per metre run or as a full structural package. Please provide building floor plan dimensions and number of storeys.','sijui6.jpg')">Get Free Quote →</button>
+          </div>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#products">Our Products</a></li>
-          <li><a href="#works">Portfolio</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+    </section>
+
+    <!-- WORKS -->
+    <section id="works">
+      <div class="section-eyebrow">Portfolio</div>
+      <h2 class="section-title">Works We <span>Have Done</span></h2>
+      <p class="works-subtitle">A selection of completed projects spanning residential compounds, commercial estates, roads and public infrastructure across Nairobi and beyond.</p>
+      <div class="works-grid reveal">
+        <div class="work-item" onclick="openLightbox('web1.jpg')"><img src="web1.jpg" alt="Project 1"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('web2.jpg')"><img src="web2.jpg" alt="Project 2"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('smash.jpg')"><img src="smash.jpg" alt="Project 3"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('proof1.jpg')"><img src="proof1.png" alt="Project 4"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('proof2.jpg')"><img src="proof2.png" alt="Project 5"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('proof3.jpg')"><img src="proof3.jpg" alt="Project 6"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('proof4.jpg')"><img src="proof4.jpg" alt="Project 7"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('proof5.jpg')"><img src="proof5.jpg" alt="Project 8"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('proof6.jpg')"><img src="reside.jpg" alt="Project 9"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('proof7.jpg')"><img src="proof7.jpg" alt="Project 10"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('proof8.jpg')"><img src="proof8.jpg" alt="Project 11"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('proof9.jpg')"><img src="guters.jpg" alt="Project 12"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('proof10.jpg')"><img src="proof10.jpg" alt="Project 13"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('proof11.jpg')"><img src="proof11.jpg" alt="Project 14"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('hao.png')"><img src="hao.png" alt="Project 15"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('hao1.jpg')"><img src="hao1.jpg" alt="Project 16"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('hao2.jpg')"><img src="hao2.jpg" alt="Project 17"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('hao3.jpg')"><img src="hao3.jpg" alt="Project 18"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('hao4.jpg')"><img src="hao4.jpg" alt="Project 19"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
       </div>
-      <div class="footer-col">
-        <h4>Products</h4>
-        <ul>
-          <li><a href="#products">Quad Blocks</a></li>
-          <li><a href="#products">Cabros</a></li>
-          <li><a href="#products">Tiles</a></li>
-          <li><a href="#products">Wooden Doors</a></li>
-          <li><a href="#products">Sanitary Fittings</a></li>
-          <li><a href="#products">Decla Iron Sheets</a></li>
-        </ul>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="section-eyebrow">What We Do</div>
+      <h2 class="section-title">Our <span>Services</span></h2>
+      <div class="services-grid reveal">
+        <div class="service-card" style="background-image:url('hao4.jpg');"><div class="service-num">01</div><div class="service-icon"></div><div class="service-name">Residential Construction</div><div class="service-desc">Full build and fit-out of residential properties — from bungalows to gated estates. We bring architectural vision to life with precision craftsmanship.</div></div>
+        <div class="service-card" style="background-image:url('reside.jpg');"><div class="service-num">02</div><div class="service-icon"></div><div class="service-name">Commercial Construction</div><div class="service-desc">Offices, retail spaces, warehouses and commercial complexes built to international standards and completed on schedule.</div></div>
+        <div class="service-card" style="background-image:url('web2.jpg');"><div class="service-num">03</div><div class="service-icon"></div><div class="service-name">Interior Design &amp; Fit-out</div><div class="service-desc">Lavish interior transformations — ceiling works, custom tiling, fitted kitchens and luxury finishes that elevate every room.</div></div>
+        <div class="service-card" style="background-image:url('landscape.jpg');"><div class="service-num">04</div><div class="service-icon"></div><div class="service-name">Paving &amp; Landscaping</div><div class="service-desc">Driveways, parking bays, estate roads and decorative garden paving laid with expert precision using our own manufactured materials.</div></div>
+        <div class="service-card" style="background-image:url('smash.jpg');"><div class="service-num">05</div><div class="service-icon"></div><div class="service-name">Fencing &amp; Perimeter Works</div><div class="service-desc">Secure and attractive perimeter solutions — precast walls, concrete post fencing, barbed wire and electric fence integration.</div></div>
+        <div class="service-card" style="background-image:url('web5.jpg');"><div class="service-num">06</div><div class="service-icon"></div><div class="service-name">Roofing &amp; Drainage</div><div class="service-desc">Complete roofing systems using Decla iron sheets and custom drainage channels — protecting your investment from Nairobi's rains.</div></div>
       </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="tel:+254722584860">0722 584 860</a></li>
-          <li><a href="tel:+254732026085">0732 026 085</a></li>
-          <li><a href="mailto:crowfitealtd@gmail.com">crowfitealtd@gmail.com</a></li>
-          <li><a href="mailto:washington.mangeli@gmail.com">washington.mangeli@gmail.com</a></li>
-        </ul>
+    </section>
+
+    <!-- WHY US -->
+    <section id="why">
+      <div class="section-eyebrow">Why Choose Us</div>
+      <h2 class="section-title">Built on <span style="color:rgba(13,13,13,0.55);">Trust</span></h2>
+      <div class="why-grid reveal">
+        <div class="why-item"><div class="why-num">01</div><div class="why-title">Local Expertise</div><div class="why-desc">Deep knowledge of Nairobi's terrain, regulations and climate ensures every project is built for the local environment.</div></div>
+        <div class="why-item"><div class="why-num">02</div><div class="why-title">Quality Materials</div><div class="why-desc">We manufacture our own building materials, giving us full control over quality at every stage of construction.</div></div>
+        <div class="why-item"><div class="why-num">03</div><div class="why-title">On-Time Delivery</div><div class="why-desc">Our disciplined project management approach means your construction finishes when promised — without compromise.</div></div>
+        <div class="why-item"><div class="why-num">04</div><div class="why-title">After-Sales Support</div><div class="why-desc">We stand behind every project with dedicated after-sales service and maintenance partnerships for total peace of mind.</div></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact-info reveal">
+        <div class="section-eyebrow">Get In Touch</div>
+        <h2 class="section-title">Let's <span>Build</span><br/>Together</h2>
+        <p>Ready to start your next project? Reach out to our team across any of our Nairobi locations and we'll get back to you promptly.</p>
+        <div class="contact-detail">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-item-label">Our Locations</div>
+              <div class="contact-item-val">Enterprise Rd · Mombasa Rd · Athi River · City Stadium, Nairobi</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-item-label">Phone</div>
+              <div class="contact-item-val">
+                <a href="tel:+254722584860">0722 584 860</a><br/>
+                <a href="tel:+254732026085">0732 026 085</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-item-label">Email</div>
+              <div class="contact-item-val">
+                <a href="mailto:crowfitealtd@gmail.com">crowfitealtd@gmail.com</a><br/>
+                <a href="mailto:washington.mangeli@gmail.com">washington.mangeli@gmail.com</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <form class="contact-form reveal" id="contactForm">
+        <div class="section-eyebrow" style="padding-top:0;">Send a Message</div>
+        <div class="form-row">
+          <div class="form-group"><label>Full Name</label><input type="text" id="cf-name" placeholder="John Kamau" required/></div>
+          <div class="form-group"><label>Phone</label><input type="tel" id="cf-phone" placeholder="0700 000 000"/></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" id="cf-email" placeholder="you@example.com" required/></div>
+        <div class="form-group">
+          <label>Service Needed</label>
+          <select id="cf-service">
+            <option value="">Select a service…</option>
+            <option>Residential Construction</option>
+            <option>Commercial Construction</option>
+            <option>Interior Design &amp; Fit-out</option>
+            <option>Paving &amp; Landscaping</option>
+            <option>Fencing &amp; Perimeter Works</option>
+            <option>Roofing &amp; Drainage</option>
+            <option>Materials Supply Only</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Your Message</label><textarea rows="5" id="cf-message" placeholder="Tell us about your project…" required></textarea></div>
+        <button type="submit" class="btn-submit">Send Message →</button>
+        <div class="form-status" id="cf-status"></div>
+      </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="nav-logo-icon">C</div>
+            <div class="nav-logo-text">
+              <span class="nav-logo-name">CROWFIT</span>
+              <span class="nav-logo-sub">East Africa Ltd</span>
+            </div>
+          </div>
+          <p>Building and construction specialists for interior and exterior lavish designs across Nairobi and East Africa. Quality craftsmanship, on every project.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a onclick="showPage('home'); scrollAfterNav('about');">About Us</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Our Products</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('works');">Portfolio</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('services');">Services</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('contact');">Contact</a></li>
+            <li><a onclick="showPage('ongoing');">Ongoing Projects</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Quad Blocks</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Cabros</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Tiles</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Wooden Doors</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Sanitary Fittings</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Decla Iron Sheets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+254722584860">0722 584 860</a></li>
+            <li><a href="tel:+254732026085">0732 026 085</a></li>
+            <li><a href="mailto:crowfitealtd@gmail.com">crowfitealtd@gmail.com</a></li>
+            <li><a href="mailto:washington.mangeli@gmail.com">washington.mangeli@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 <span>Crowfit East Africa Ltd</span>. All rights reserved.</p>
+        <p>Enterprise Rd · Mombasa Rd · Athi River · City Stadium, Nairobi</p>
+      </div>
+    </footer>
+
+  </div><!-- end page-home -->
+
+
+  <!-- ═══════════════════════════
+       ONGOING PROJECTS PAGE
+  ════════════════════════════ -->
+  <div id="page-ongoing" class="page">
+
+    <div class="ongoing-hero">
+      <div class="section-eyebrow">Live On-Site</div>
+      <h1 class="section-title">Ongoing <span>Projects</span></h1>
+      <p>A live look at the projects currently under construction by Crowfit East Africa Ltd — from groundwork to finishing, every stage built to the highest standard.</p>
+    </div>
+
+    <div class="ongoing-projects-section">
+      <div class="ongoing-grid">
+
+        <div class="ongoing-item" onclick="openLightbox('proj1.jpg')">
+          <img src="proj1.jpg" alt="Ongoing Project 1"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Project — 01</div>
+            <div class="ongoing-item-label">Active Site</div>
+            <div class="ongoing-item-expand">Click to expand →</div>
+          </div>
+        </div>
+
+        <div class="ongoing-item" onclick="openLightbox('proj2.jpg')">
+          <img src="proj2.jpg" alt="Ongoing Project 2"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Project — 02</div>
+            <div class="ongoing-item-label">Active Site</div>
+            <div class="ongoing-item-expand">Click to expand →</div>
+          </div>
+        </div>
+
+        <div class="ongoing-item" onclick="openLightbox('proj3.jpg')">
+          <img src="proj3.jpg" alt="Ongoing Project 3"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Project — 03</div>
+            <div class="ongoing-item-label">Active Site</div>
+            <div class="ongoing-item-expand">Click to expand →</div>
+          </div>
+        </div>
+
+        <div class="ongoing-item" onclick="openLightbox('proj4.jpg')">
+          <img src="proj4.jpg" alt="Ongoing Project 4"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Project — 04</div>
+            <div class="ongoing-item-label">Active Site</div>
+            <div class="ongoing-item-expand">Click to expand →</div>
+          </div>
+        </div>
+
+        <div class="ongoing-item" onclick="openLightbox('proj5.jpg')">
+          <img src="proj5.jpg" alt="Ongoing Project 5"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Project — 05</div>
+            <div class="ongoing-item-label">Active Site</div>
+            <div class="ongoing-item-expand">Click to expand →</div>
+          </div>
+        </div>
+
+        <div class="ongoing-item" onclick="openLightbox('hao3.jpg')">
+          <img src="hao3.jpg" alt="Ongoing Project 6"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Project — 06</div>
+            <div class="ongoing-item-label">Active Site</div>
+            <div class="ongoing-item-expand">Click to expand →</div>
+          </div>
+        </div>
+
+        <div class="ongoing-item" onclick="openLightbox('proof8.jpg')">
+          <img src="proof8.jpg" alt="Ongoing Project 7"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Project — 07</div>
+            <div class="ongoing-item-label">Active Site</div>
+            <div class="ongoing-item-expand">Click to expand →</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CTA STRIP -->
+      <div class="ongoing-cta">
+        <div class="ongoing-cta-text">
+          <h3>Interested in <span style="color:var(--gold);">Working With Us?</span></h3>
+          <p>These projects represent our current active builds. If you'd like to discuss a new project, request a site visit, or get a quote, our team is ready to talk.</p>
+        </div>
+        <button class="btn-primary" onclick="showPage('home'); scrollAfterNav('contact');">Get a Quote →</button>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2025 <span>Crowfit East Africa Ltd</span>. All rights reserved.</p>
-      <p>Enterprise Rd · Mombasa Rd · Athi River · City Stadium, Nairobi</p>
-    </div>
-  </footer>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <div class="nav-logo-icon">C</div>
+            <div class="nav-logo-text">
+              <span class="nav-logo-name">CROWFIT</span>
+              <span class="nav-logo-sub">East Africa Ltd</span>
+            </div>
+          </div>
+          <p>Building and construction specialists for interior and exterior lavish designs across Nairobi and East Africa. Quality craftsmanship, on every project.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a onclick="showPage('home'); scrollAfterNav('about');">About Us</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Our Products</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('works');">Portfolio</a></li>
+            <li><a onclick="showPage('ongoing');">Ongoing Projects</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('contact');">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Quad Blocks</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Cabros</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Tiles</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Wooden Doors</a></li>
+            <li><a onclick="showPage('home'); scrollAfterNav('products');">Decla Iron Sheets</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+254722584860">0722 584 860</a></li>
+            <li><a href="tel:+254732026085">0732 026 085</a></li>
+            <li><a href="mailto:crowfitealtd@gmail.com">crowfitealtd@gmail.com</a></li>
+            <li><a href="mailto:washington.mangeli@gmail.com">washington.mangeli@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 <span>Crowfit East Africa Ltd</span>. All rights reserved.</p>
+        <p>Enterprise Rd · Mombasa Rd · Athi River · City Stadium, Nairobi</p>
+      </div>
+    </footer>
+
+  </div><!-- end page-ongoing -->
+
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <span class="lightbox-close" onclick="closeLightbox()">×</span>
-    <img id="lightbox-img" src="" alt="Project" />
+    <img id="lightbox-img" src="" alt="Project"/>
   </div>
 
   <!-- PRODUCT QUOTE MODAL -->
@@ -1352,36 +1393,21 @@
         <div class="quote-modal-eyebrow">Product Enquiry</div>
         <div class="quote-modal-title">Get a Free Quote</div>
         <div class="quote-modal-product" id="qm-product-badge">Product Name</div>
-        <button class="quote-modal-close" onclick="closeQuoteModal()" aria-label="Close">×</button>
+        <button class="quote-modal-close" onclick="closeQuoteModal()">×</button>
       </div>
       <div class="quote-modal-body">
-        <div class="quote-product-summary" id="qm-summary">
+        <div class="quote-product-summary">
           <strong id="qm-product-name">Product</strong>
           <span id="qm-product-context"></span>
         </div>
         <form class="quote-form" id="quoteForm">
           <div class="quote-form-row">
-            <div class="form-group">
-              <label>Full Name *</label>
-              <input type="text" id="qm-name" placeholder="e.g. John Kamau" required />
-            </div>
-            <div class="form-group">
-              <label>Phone Number *</label>
-              <input type="tel" id="qm-phone" placeholder="e.g. 0722 000 000" required />
-            </div>
+            <div class="form-group"><label>Full Name *</label><input type="text" id="qm-name" placeholder="e.g. John Kamau" required/></div>
+            <div class="form-group"><label>Phone Number *</label><input type="tel" id="qm-phone" placeholder="e.g. 0722 000 000" required/></div>
           </div>
-          <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" id="qm-email" placeholder="you@example.com" />
-          </div>
-          <div class="form-group">
-            <label>Quantity / Area / Dimensions *</label>
-            <input type="text" id="qm-quantity" placeholder="e.g. 200 m², 50 units, 15 doors…" required />
-          </div>
-          <div class="form-group">
-            <label>Project Description &amp; Additional Details *</label>
-            <textarea id="qm-description" rows="4" placeholder="Describe your project, location, timeline or any specific requirements…" required></textarea>
-          </div>
+          <div class="form-group"><label>Email Address</label><input type="email" id="qm-email" placeholder="you@example.com"/></div>
+          <div class="form-group"><label>Quantity / Area / Dimensions *</label><input type="text" id="qm-quantity" placeholder="e.g. 200 m², 50 units, 15 doors…" required/></div>
+          <div class="form-group"><label>Project Description &amp; Additional Details *</label><textarea id="qm-description" rows="4" placeholder="Describe your project, location, timeline or any specific requirements…" required></textarea></div>
           <div class="quote-status" id="qm-status"></div>
           <button type="submit" class="quote-submit-btn">Submit Quote Request →</button>
           <p class="quote-form-note">Your quote will be sent directly to crowfitealtd@gmail.com. Our team will respond within 24 hours.</p>
@@ -1391,6 +1417,25 @@
   </div>
 
   <script>
+    /* ── PAGE SWITCHING ── */
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + name).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('nav-home').classList.remove('nav-active');
+      document.getElementById('nav-ongoing').classList.remove('nav-active');
+      if (name === 'home')    document.getElementById('nav-home').classList.add('nav-active');
+      if (name === 'ongoing') document.getElementById('nav-ongoing').classList.add('nav-active');
+      setTimeout(checkReveals, 100);
+    }
+
+    function scrollAfterNav(id) {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 80);
+    }
+
     /* ── HERO SLIDESHOW ── */
     const heroSlides = document.querySelectorAll('.hero-slide');
     let currentSlide = 0;
@@ -1406,6 +1451,12 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.12 });
     reveals.forEach(el => observer.observe(el));
+    function checkReveals() {
+      reveals.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.92) el.classList.add('visible');
+      });
+    }
 
     /* ── LIGHTBOX ── */
     function openLightbox(src) {
@@ -1424,8 +1475,7 @@
     /* ── NAV ── */
     window.addEventListener('scroll', () => {
       const nav = document.querySelector('nav');
-      nav.style.background = window.scrollY > 60
-        ? 'rgba(8,8,8,0.97)' : 'rgba(10,10,10,0.72)';
+      nav.style.background = window.scrollY > 60 ? 'rgba(8,8,8,0.97)' : 'rgba(10,10,10,0.72)';
     });
     const navToggle = document.getElementById('navToggle');
     const navLinks  = document.getElementById('navLinks');
@@ -1440,29 +1490,22 @@
 
     /* ── PRODUCT QUOTE MODAL ── */
     let activeProduct = {};
-
     function openQuoteModal(event, productName, category, context, imgSrc) {
       event.stopPropagation();
       activeProduct = { productName, category, context, imgSrc };
-
       document.getElementById('qm-product-badge').textContent = productName;
       document.getElementById('qm-product-name').textContent  = productName + ' — ' + category;
       document.getElementById('qm-product-context').textContent = context;
-
-      // Reset form
       document.getElementById('quoteForm').reset();
       document.getElementById('qm-status').textContent = '';
       document.getElementById('qm-status').className   = 'quote-status';
-
       document.getElementById('quoteModal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-
     function closeQuoteModal() {
       document.getElementById('quoteModal').classList.remove('open');
       document.body.style.overflow = '';
     }
-
     function handleModalOverlayClick(e) {
       if (e.target === document.getElementById('quoteModal')) closeQuoteModal();
     }
@@ -1470,99 +1513,67 @@
     /* ── QUOTE FORM SUBMIT ── */
     document.getElementById('quoteForm').addEventListener('submit', function(e) {
       e.preventDefault();
-
       const name        = document.getElementById('qm-name').value.trim();
       const phone       = document.getElementById('qm-phone').value.trim();
       const email       = document.getElementById('qm-email').value.trim();
       const quantity    = document.getElementById('qm-quantity').value.trim();
       const description = document.getElementById('qm-description').value.trim();
       const statusEl    = document.getElementById('qm-status');
-
       if (!name || !phone || !quantity || !description) {
         statusEl.textContent = 'Please fill in all required fields marked with *.';
         statusEl.className   = 'quote-status error';
         return;
       }
-
+      statusEl.classList.remove('error');
       const product  = activeProduct.productName;
       const category = activeProduct.category;
-
-      const subject = `Product Quote Request: ${product} — ${name}`;
-
+      const subject  = `Product Quote Request: ${product} — ${name}`;
       const bodyLines = [
         '═══════════════════════════════════════',
         '  CROWFIT EAST AFRICA – PRODUCT QUOTE REQUEST',
         '═══════════════════════════════════════',
-        '',
-        'PRODUCT INFORMATION',
-        '───────────────────',
-        `Product:   ${product}`,
-        `Category:  ${category}`,
-        '',
-        'CLIENT INFORMATION',
-        '──────────────────',
-        `Full Name:    ${name}`,
-        `Phone:        ${phone}`,
-        `Email:        ${email || 'Not provided'}`,
-        '',
-        'ORDER DETAILS',
-        '─────────────',
-        `Quantity / Area / Dimensions:`,
-        `  ${quantity}`,
-        '',
-        'PROJECT DESCRIPTION',
-        '───────────────────',
-        description,
-        '',
-        '═══════════════════════════════════════',
+        '', 'PRODUCT INFORMATION', '───────────────────',
+        `Product:   ${product}`, `Category:  ${category}`,
+        '', 'CLIENT INFORMATION', '──────────────────',
+        `Full Name:    ${name}`, `Phone:        ${phone}`, `Email:        ${email || 'Not provided'}`,
+        '', 'ORDER DETAILS', '─────────────',
+        'Quantity / Area / Dimensions:', `  ${quantity}`,
+        '', 'PROJECT DESCRIPTION', '───────────────────', description,
+        '', '═══════════════════════════════════════',
         'This quote request was submitted via the Crowfit East Africa website.',
         '═══════════════════════════════════════',
       ];
-
-      const body     = bodyLines.join('\n');
-      const mailto   = `mailto:crowfitealtd@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
+      const mailto = `mailto:crowfitealtd@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
       statusEl.className   = 'quote-status';
       statusEl.textContent = 'Opening your email app…';
-
       window.location.href = mailto;
-
       setTimeout(() => {
         statusEl.textContent = 'If your email app did not open, please contact us directly at crowfitealtd@gmail.com';
       }, 2800);
     });
 
     /* ── CONTACT FORM ── */
-    const contactForm = document.getElementById('contactForm');
-    const cfStatus    = document.getElementById('cf-status');
-    const RECIPIENT   = 'crowfitealtd@gmail.com';
-
-    contactForm.addEventListener('submit', function(e) {
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const name    = document.getElementById('cf-name').value.trim();
       const phone   = document.getElementById('cf-phone').value.trim();
       const email   = document.getElementById('cf-email').value.trim();
       const service = document.getElementById('cf-service').value;
       const message = document.getElementById('cf-message').value.trim();
-
+      const cfStatus = document.getElementById('cf-status');
       if (!name || !email || !message) {
         cfStatus.textContent = 'Please fill in your name, email and message.';
         cfStatus.classList.add('error');
         return;
       }
       cfStatus.classList.remove('error');
-
       const subject = `New Project Enquiry from ${name}${service ? ' — ' + service : ''}`;
       const bodyLines = [
-        `Name: ${name}`,
-        `Phone: ${phone || 'Not provided'}`,
-        `Email: ${email}`,
-        `Service Needed: ${service || 'Not specified'}`,
-        '',
-        'Message:',
-        message,
+        `Name: ${name}`, `Phone: ${phone || 'Not provided'}`,
+        `Email: ${email}`, `Service Needed: ${service || 'Not specified'}`,
+        '', 'Message:', message,
       ];
-      const mailto = `mailto:${RECIPIENT}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+      const mailto = `mailto:crowfitealtd@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
       cfStatus.textContent = 'Opening your email app to send this to crowfitealtd@gmail.com…';
       window.location.href = mailto;
       setTimeout(() => {
@@ -1570,5 +1581,6 @@
       }, 2500);
     });
   </script>
+
 </body>
-</html>
+  </html>
