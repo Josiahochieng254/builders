@@ -30,59 +30,139 @@
     }
     img { max-width: 100%; }
 
-    /* ── NAV ── */
+    /* ── NAV — IMPROVED LAYOUT ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 60px;
+      padding: 0 48px;
+      height: 72px;
       background: rgba(10,10,10,0.72);
       backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(201,168,76,0.15);
       transition: background 0.3s;
+      gap: 20px;
     }
     .nav-logo {
-      display: flex; align-items: center; gap: 12px;
-      cursor: pointer;
+      display: flex; align-items: center; gap: 10px;
+      cursor: pointer; flex-shrink: 0;
+      min-width: fit-content;
     }
     .nav-logo-icon {
-      width: 42px; height: 42px;
+      width: 36px; height: 36px;
       background: var(--gold);
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       display: flex; align-items: center; justify-content: center;
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px; color: var(--dark);
+      font-size: 15px; color: var(--dark);
       flex-shrink: 0;
     }
     .nav-logo-text { display: flex; flex-direction: column; }
     .nav-logo-name {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px; letter-spacing: 2px; color: var(--white);
+      font-size: 19px; letter-spacing: 2.5px; color: var(--white);
       line-height: 1;
     }
     .nav-logo-sub {
-      font-size: 9px; letter-spacing: 3px; color: var(--gold);
+      font-size: 8px; letter-spacing: 2.5px; color: var(--gold);
       text-transform: uppercase; margin-top: 2px;
     }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
+
+    /* Nav links — improved spacing */
+    .nav-links {
+      display: flex;
+      gap: 0;
+      list-style: none;
+      flex: 1;
+      justify-content: center;
+      align-items: center;
+      min-width: 0;
+      margin: 0 20px;
+    }
     .nav-links a {
-      text-decoration: none; color: rgba(255,255,255,0.75);
-      font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,0.6);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
       font-weight: 500;
       transition: color 0.2s;
       cursor: pointer;
+      padding: 8px 14px;
+      white-space: nowrap;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 14px; right: 14px;
+      height: 1px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.25s ease;
+      transform-origin: center;
     }
     .nav-links a:hover,
     .nav-links a.nav-active { color: var(--gold); }
-    .nav-cta {
-      background: var(--gold); color: var(--dark);
-      padding: 10px 24px; border: none; cursor: pointer;
-      font-family: 'Inter', sans-serif;
-      font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase;
-      transition: background 0.2s, transform 0.15s;
+    .nav-links a:hover::after,
+    .nav-links a.nav-active::after { transform: scaleX(1); }
+
+    /* ── NAV RIGHT — always visible, never shrinks ── */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+      min-width: fit-content;
+    }
+
+    /* Social icons in nav */
+    .nav-socials {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-socials a {
+      display: flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px;
+      color: rgba(255,255,255,0.45);
+      transition: color 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+    .nav-socials a:hover { color: var(--gold); transform: translateY(-1px); }
+    .nav-socials svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .nav-divider {
+      width: 1px; height: 24px;
+      background: rgba(255,255,255,0.15);
       flex-shrink: 0;
     }
-    .nav-cta:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+    /* ── GET A QUOTE BUTTON — fixed, prominent, always visible ── */
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      min-width: 140px;
+      padding: 0 24px;
+      background: var(--gold);
+      color: var(--dark);
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.4), 0 4px 18px rgba(201,168,76,0.25);
+    }
+    .nav-cta:hover {
+      background: var(--gold-lt);
+      transform: translateY(-1px);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.7), 0 6px 24px rgba(201,168,76,0.35);
+    }
+
     .nav-toggle {
       display: none;
       flex-direction: column;
@@ -91,7 +171,7 @@
       padding: 8px; z-index: 110;
     }
     .nav-toggle span {
-      display: block; width: 26px; height: 2px;
+      display: block; width: 24px; height: 2px;
       background: var(--white); transition: all 0.3s;
     }
     .nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -380,6 +460,23 @@
       font-size: 22px;
     }
 
+    /* ── HOME IMAGE GRID (703×688 ratio) ── */
+    .ratio-box {
+      position: relative;
+      width: 100%;
+      padding-top: calc(688 / 703 * 100%);
+      overflow: hidden;
+    }
+    .ratio-box img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
     /* ── SERVICES ── */
     #services { background: var(--dark2); }
     .services-grid {
@@ -596,7 +693,29 @@
       gap: 60px; margin-bottom: 48px;
     }
     .footer-brand .nav-logo { margin-bottom: 18px; cursor: default; }
-    .footer-brand p { font-size: 13px; color: var(--text-muted); line-height: 1.75; }
+    .footer-brand p { font-size: 13px; color: var(--text-muted); line-height: 1.75; margin-bottom: 20px; }
+
+    /* Footer social icons */
+    .footer-socials {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 4px;
+    }
+    .footer-socials a {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(201,168,76,0.2);
+      color: rgba(255,255,255,0.4);
+      transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+    .footer-socials a:hover {
+      color: var(--dark);
+      background: var(--gold);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .footer-socials svg { width: 16px; height: 16px; fill: currentColor; }
+
     .footer-col h4 { font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
     .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
     .footer-col ul li a { text-decoration: none; font-size: 13px; color: var(--text-muted); transition: color 0.2s; cursor: pointer; }
@@ -700,6 +819,12 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 1200px) {
+      nav { padding: 0 24px; gap: 16px; }
+      .nav-links { gap: 0; margin: 0 16px; }
+      .nav-links a { padding: 8px 12px; font-size: 10px; letter-spacing: 1.2px; }
+      .nav-socials { gap: 6px; }
+    }
     @media (max-width: 1100px) {
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .why-grid { grid-template-columns: repeat(2, 1fr); }
@@ -707,8 +832,9 @@
       .ongoing-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 1024px) {
-      nav { padding: 16px 32px; }
-      .nav-links { gap: 20px; }
+      .nav-socials { display: none; }
+      .nav-divider { display: none; }
+      .nav-links { flex: 0; gap: 0; margin: 0 16px; }
       section { padding: 80px 32px; }
       #about, #contact { grid-template-columns: 1fr; gap: 48px; }
       .hero-content { padding: 0 32px; }
@@ -723,6 +849,12 @@
     @media (max-width: 860px) {
       .nav-links { display: none; }
       .nav-toggle { display: flex; }
+      .nav-cta {
+        height: 36px;
+        min-width: 110px;
+        padding: 0 16px;
+        font-size: 10px;
+      }
       .nav-links.mobile-open {
         display: flex; position: fixed; top: 0; right: 0; bottom: 0;
         width: min(78vw, 320px);
@@ -731,17 +863,18 @@
         padding: 110px 36px 36px; gap: 28px;
         border-left: 1px solid rgba(201,168,76,0.2);
         z-index: 105; animation: slideIn 0.3s ease;
+        justify-content: flex-start;
       }
       @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
-      .nav-links.mobile-open a { font-size: 15px; }
-      .nav-cta { padding: 10px 18px; font-size: 11px; }
+      .nav-links.mobile-open a { font-size: 15px; padding: 0; letter-spacing: 2px; }
+      .nav-links.mobile-open a::after { display: none; }
       .quote-form-row { grid-template-columns: 1fr; }
       .quote-modal { max-width: 96vw; }
       .quote-modal-header, .quote-modal-body { padding-left: 22px; padding-right: 22px; }
       .ongoing-cta { flex-direction: column; align-items: flex-start; }
     }
     @media (max-width: 768px) {
-      nav { padding: 14px 18px; }
+      nav { padding: 0 18px; height: 64px; }
       section { padding: 64px 20px; }
       .hero-content { padding: 0 20px; }
       .hero-title { font-size: clamp(40px, 12vw, 70px); }
@@ -767,6 +900,14 @@
       .ongoing-hero { padding: 60px 20px 40px; }
       .ongoing-projects-section { padding: 48px 20px; }
       .ongoing-cta { padding: 32px 24px; }
+      footer { padding: 50px 20px 24px; }
+      .nav-cta {
+        height: 34px;
+        min-width: 100px;
+        padding: 0 14px;
+        font-size: 10px;
+        letter-spacing: 1.2px;
+      }
     }
     @media (max-width: 480px) {
       .hero-eyebrow { font-size: 10px; letter-spacing: 2px; }
@@ -777,7 +918,7 @@
       .product-name { font-size: 20px; }
       .product-info { padding: 18px; }
       .works-grid { grid-template-columns: 1fr 1fr; gap: 3px; }
-      .nav-logo-name { font-size: 18px; }
+      .nav-logo-name { font-size: 16px; }
       .stat { text-align: left; }
       .hero-stats { justify-content: flex-start; }
     }
@@ -785,35 +926,72 @@
 </head>
 <body>
 
+  <!-- SVG SOCIAL ICONS (hidden sprite) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="icon-instagram" viewBox="0 0 24 24">
+      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+    </symbol>
+    <symbol id="icon-tiktok" viewBox="0 0 24 24">
+      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.73a8.27 8.27 0 004.83 1.54V6.8a4.85 4.85 0 01-1.06-.11z"/>
+    </symbol>
+    <symbol id="icon-facebook" viewBox="0 0 24 24">
+      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    </symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </symbol>
+    <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </symbol>
+  </svg>
+
   <!-- NAV -->
   <nav>
     <div class="nav-logo" onclick="showPage('home')">
       <div class="nav-logo-icon">C</div>
       <div class="nav-logo-text">
         <span class="nav-logo-name">CROWFIT</span>
-        <span class="nav-logo-sub">East Africa Ltd</span>
+        <span class="nav-logo-sub">East Africa</span>
       </div>
     </div>
+
     <ul class="nav-links" id="navLinks">
       <li><a onclick="showPage('home'); closeMobileNav();" id="nav-home" class="nav-active">Home</a></li>
       <li><a href="#about" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('about');">About</a></li>
       <li><a href="#products" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('products');">Products</a></li>
-      <li><a href="#works" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('works');">Our Works</a></li>
-      <li><a onclick="showPage('ongoing'); closeMobileNav();" id="nav-ongoing">Ongoing Projects</a></li>
+      <li><a href="#works" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('works');">Works</a></li>
+      <li><a onclick="showPage('ongoing'); closeMobileNav();" id="nav-ongoing">Ongoing-Projects</a></li>
       <li><a href="#services" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('services');">Services</a></li>
       <li><a href="#contact" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('contact');">Contact</a></li>
     </ul>
-    <button class="nav-cta" onclick="showPage('home'); scrollAfterNav('contact');">
-      Get a Quote
-    </button>
-    <button class="nav-toggle" id="navToggle" onclick="toggleMobileNav()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+
+    <div class="nav-right">
+      <div class="nav-socials">
+        <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram">
+          <svg><use href="#icon-instagram"/></svg>
+        </a>
+        <a href="https://tiktok.com" target="_blank" rel="noopener" title="TikTok">
+          <svg><use href="#icon-tiktok"/></svg>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" title="Facebook">
+          <svg><use href="#icon-facebook"/></svg>
+        </a>
+        <a href="https://x.com" target="_blank" rel="noopener" title="X (Twitter)">
+          <svg><use href="#icon-x"/></svg>
+        </a>
+        <a href="https://wa.me/254722584860" target="_blank" rel="noopener" title="WhatsApp">
+          <svg><use href="#icon-whatsapp"/></svg>
+        </a>
+      </div>
+      <div class="nav-divider"></div>
+      <button class="nav-cta" onclick="showPage('home'); scrollAfterNav('contact');">Get a Quote</button>
+      <button class="nav-toggle" id="navToggle" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 
-  <!-- ═══════════════════════════
-       HOME PAGE
-  ════════════════════════════ -->
+  <!-- HOME PAGE -->
   <div id="page-home" class="page active">
 
     <!-- HERO -->
@@ -1067,25 +1245,82 @@
       <h2 class="section-title">Works We <span>Have Done</span></h2>
       <p class="works-subtitle">A selection of completed projects spanning residential compounds, commercial estates, roads and public infrastructure across Nairobi and beyond.</p>
       <div class="works-grid reveal">
-        <div class="work-item" onclick="openLightbox('web1.jpg')"><img src="web1.jpg" alt="Project 1"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('web2.jpg')"><img src="web2.jpg" alt="Project 2"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('smash.jpg')"><img src="smash.jpg" alt="Project 3"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('proof1.jpg')"><img src="proof1.png" alt="Project 4"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('proof2.jpg')"><img src="proof2.png" alt="Project 5"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('proof3.jpg')"><img src="proof3.jpg" alt="Project 6"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('proof4.jpg')"><img src="proof4.jpg" alt="Project 7"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('proof5.jpg')"><img src="proof5.jpg" alt="Project 8"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('proof6.jpg')"><img src="reside.jpg" alt="Project 9"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('proof7.jpg')"><img src="proof7.jpg" alt="Project 10"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('proof8.jpg')"><img src="proof8.jpg" alt="Project 11"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('proof9.jpg')"><img src="guters.jpg" alt="Project 12"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('proof10.jpg')"><img src="proof10.jpg" alt="Project 13"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('proof11.jpg')"><img src="proof11.jpg" alt="Project 14"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('hao.png')"><img src="hao.png" alt="Project 15"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('hao1.jpg')"><img src="hao1.jpg" alt="Project 16"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('hao2.jpg')"><img src="hao2.jpg" alt="Project 17"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('hao3.jpg')"><img src="hao3.jpg" alt="Project 18"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
-        <div class="work-item" onclick="openLightbox('hao4.jpg')"><img src="hao4.jpg" alt="Project 19"/><div class="work-overlay"><div class="work-overlay-icon">⤢</div></div></div>
+        <div class="work-item" onclick="openLightbox('web1.jpg')">
+          <div class="ratio-box"><img src="web1.jpg" alt="Project 1"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('web2.jpg')">
+          <div class="ratio-box"><img src="web2.jpg" alt="Project 2"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('smash.jpg')">
+          <div class="ratio-box"><img src="smash.jpg" alt="Project 3"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('proof1.jpg')">
+          <div class="ratio-box"><img src="proof1.png" alt="Project 4"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('proof2.jpg')">
+          <div class="ratio-box"><img src="proof2.png" alt="Project 5"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('proof3.jpg')">
+          <div class="ratio-box"><img src="proof3.jpg" alt="Project 6"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('proof4.jpg')">
+          <div class="ratio-box"><img src="proof4.jpg" alt="Project 7"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('proof5.jpg')">
+          <div class="ratio-box"><img src="proof5.jpg" alt="Project 8"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('proof6.jpg')">
+          <div class="ratio-box"><img src="reside.jpg" alt="Project 9"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('proof7.jpg')">
+          <div class="ratio-box"><img src="proof7.jpg" alt="Project 10"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('proof8.jpg')">
+          <div class="ratio-box"><img src="proof8.jpg" alt="Project 11"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('proof9.jpg')">
+          <div class="ratio-box"><img src="guters.jpg" alt="Project 12"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('proof10.jpg')">
+          <div class="ratio-box"><img src="proof10.jpg" alt="Project 13"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('proof11.jpg')">
+          <div class="ratio-box"><img src="proof11.jpg" alt="Project 14"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('hao.png')">
+          <div class="ratio-box"><img src="hao.png" alt="Project 15"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('hao1.jpg')">
+          <div class="ratio-box"><img src="hao1.jpg" alt="Project 16"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('hao2.jpg')">
+          <div class="ratio-box"><img src="hao2.jpg" alt="Project 17"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('hao3.jpg')">
+          <div class="ratio-box"><img src="hao3.jpg" alt="Project 18"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
+        <div class="work-item" onclick="openLightbox('hao4.jpg')">
+          <div class="ratio-box"><img src="hao4.jpg" alt="Project 19"/></div>
+          <div class="work-overlay"><div class="work-overlay-icon">⤢</div></div>
+        </div>
       </div>
     </section>
 
@@ -1178,7 +1413,7 @@
       </form>
     </section>
 
-    <!-- FOOTER -->
+    <!-- HOME FOOTER -->
     <footer>
       <div class="footer-top">
         <div class="footer-brand">
@@ -1190,6 +1425,13 @@
             </div>
           </div>
           <p>Building and construction specialists for interior and exterior lavish designs across Nairobi and East Africa. Quality craftsmanship, on every project.</p>
+          <div class="footer-socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram"><svg><use href="#icon-instagram"/></svg></a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" title="TikTok"><svg><use href="#icon-tiktok"/></svg></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" title="Facebook"><svg><use href="#icon-facebook"/></svg></a>
+            <a href="https://x.com" target="_blank" rel="noopener" title="X (Twitter)"><svg><use href="#icon-x"/></svg></a>
+            <a href="https://wa.me/254722584860" target="_blank" rel="noopener" title="WhatsApp"><svg><use href="#icon-whatsapp"/></svg></a>
+          </div>
         </div>
         <div class="footer-col">
           <h4>Quick Links</h4>
@@ -1231,10 +1473,7 @@
 
   </div><!-- end page-home -->
 
-
-  <!-- ═══════════════════════════
-       ONGOING PROJECTS PAGE
-  ════════════════════════════ -->
+  <!-- ONGOING PROJECTS PAGE -->
   <div id="page-ongoing" class="page">
 
     <div class="ongoing-hero">
@@ -1245,7 +1484,6 @@
 
     <div class="ongoing-projects-section">
       <div class="ongoing-grid">
-
         <div class="ongoing-item" onclick="openLightbox('proj1.jpg')">
           <img src="proj1.jpg" alt="Ongoing Project 1"/>
           <div class="ongoing-expand-icon">⤢</div>
@@ -1255,7 +1493,6 @@
             <div class="ongoing-item-expand">Click to expand →</div>
           </div>
         </div>
-
         <div class="ongoing-item" onclick="openLightbox('proj2.jpg')">
           <img src="proj2.jpg" alt="Ongoing Project 2"/>
           <div class="ongoing-expand-icon">⤢</div>
@@ -1265,7 +1502,6 @@
             <div class="ongoing-item-expand">Click to expand →</div>
           </div>
         </div>
-
         <div class="ongoing-item" onclick="openLightbox('proj3.jpg')">
           <img src="proj3.jpg" alt="Ongoing Project 3"/>
           <div class="ongoing-expand-icon">⤢</div>
@@ -1275,7 +1511,6 @@
             <div class="ongoing-item-expand">Click to expand →</div>
           </div>
         </div>
-
         <div class="ongoing-item" onclick="openLightbox('proj4.jpg')">
           <img src="proj4.jpg" alt="Ongoing Project 4"/>
           <div class="ongoing-expand-icon">⤢</div>
@@ -1285,7 +1520,6 @@
             <div class="ongoing-item-expand">Click to expand →</div>
           </div>
         </div>
-
         <div class="ongoing-item" onclick="openLightbox('proj5.jpg')">
           <img src="proj5.jpg" alt="Ongoing Project 5"/>
           <div class="ongoing-expand-icon">⤢</div>
@@ -1295,7 +1529,6 @@
             <div class="ongoing-item-expand">Click to expand →</div>
           </div>
         </div>
-
         <div class="ongoing-item" onclick="openLightbox('hao3.jpg')">
           <img src="hao3.jpg" alt="Ongoing Project 6"/>
           <div class="ongoing-expand-icon">⤢</div>
@@ -1305,7 +1538,6 @@
             <div class="ongoing-item-expand">Click to expand →</div>
           </div>
         </div>
-
         <div class="ongoing-item" onclick="openLightbox('proof8.jpg')">
           <img src="proof8.jpg" alt="Ongoing Project 7"/>
           <div class="ongoing-expand-icon">⤢</div>
@@ -1315,10 +1547,8 @@
             <div class="ongoing-item-expand">Click to expand →</div>
           </div>
         </div>
-
       </div>
 
-      <!-- CTA STRIP -->
       <div class="ongoing-cta">
         <div class="ongoing-cta-text">
           <h3>Interested in <span style="color:var(--gold);">Working With Us?</span></h3>
@@ -1328,7 +1558,7 @@
       </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- ONGOING FOOTER -->
     <footer>
       <div class="footer-top">
         <div class="footer-brand">
@@ -1340,6 +1570,13 @@
             </div>
           </div>
           <p>Building and construction specialists for interior and exterior lavish designs across Nairobi and East Africa. Quality craftsmanship, on every project.</p>
+          <div class="footer-socials">
+            <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram"><svg><use href="#icon-instagram"/></svg></a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" title="TikTok"><svg><use href="#icon-tiktok"/></svg></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" title="Facebook"><svg><use href="#icon-facebook"/></svg></a>
+            <a href="https://x.com" target="_blank" rel="noopener" title="X (Twitter)"><svg><use href="#icon-x"/></svg></a>
+            <a href="https://wa.me/254722584860" target="_blank" rel="noopener" title="WhatsApp"><svg><use href="#icon-whatsapp"/></svg></a>
+          </div>
         </div>
         <div class="footer-col">
           <h4>Quick Links</h4>
@@ -1378,7 +1615,6 @@
     </footer>
 
   </div><!-- end page-ongoing -->
-
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
