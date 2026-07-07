@@ -113,6 +113,7 @@
     .nav-links a.nav-active { color: var(--gold); }
     .nav-links a:hover::after,
     .nav-links a.nav-active::after { transform: scaleX(1); }
+    .nav-mobile-extra { display: none; }
 
     /* ── NAV RIGHT — always visible ── */
     .nav-right {
@@ -209,6 +210,7 @@
     #hero {
       position: relative;
       min-height: 100vh;
+      min-height: 100svh; /* real visible mobile viewport, excludes browser UI overlap */
       display: flex; 
       align-items: center; 
       justify-content: flex-start;
@@ -944,6 +946,7 @@
     #page-ongoing { 
       padding-top: clamp(60px, 10vh, 100px); 
       min-height: 100vh; 
+      min-height: 100svh;
       background: var(--dark); 
     }
     .ongoing-hero {
@@ -1413,35 +1416,52 @@
     @media (max-width: 860px) {
       .nav-links { display: none; }
       .nav-toggle { display: flex; }
+      /* Full-screen mobile menu: uses svh so it always matches the REAL
+         visible viewport on phones (100vh is taller than the visible area
+         once the browser address bar is factored in, which is why the
+         menu used to render below the fold and need scrolling to see). */
       .nav-links.mobile-open {
         display: flex; 
         position: fixed; 
-        top: 0; 
-        right: 0; 
-        bottom: 0;
-        width: min(78vw, 320px);
-        background: rgba(10,10,10,0.98); 
+        inset: 0;
+        height: 100vh;
+        height: 100svh;
+        width: 100%;
+        background: rgba(8,8,8,0.98); 
         backdrop-filter: blur(14px);
         flex-direction: column; 
-        align-items: flex-start;
-        padding: clamp(80px, 15vh, 110px) clamp(24px, 4vw, 36px) clamp(24px, 4vw, 36px); 
-        gap: clamp(18px, 3vw, 28px);
-        border-left: 1px solid rgba(201,168,76,0.2);
+        align-items: center;
+        justify-content: center;
+        padding: clamp(90px, 12svh, 100px) clamp(24px, 6vw, 36px) clamp(24px, 6vh, 40px); 
+        gap: clamp(14px, 2.5svh, 22px);
         z-index: 105; 
         animation: slideIn 0.3s ease;
-        justify-content: flex-start;
         overflow-y: auto;
       }
       @keyframes slideIn { 
-        from { transform: translateX(100%); } 
-        to { transform: translateX(0); } 
+        from { opacity: 0; transform: translateY(-12px); } 
+        to { opacity: 1; transform: translateY(0); } 
       }
+      .nav-links.mobile-open li { width: 100%; text-align: center; }
       .nav-links.mobile-open a { 
-        font-size: clamp(12px, 2.5vw, 15px); 
-        padding: 0; 
+        display: block;
+        font-size: clamp(15px, 4vw, 19px); 
+        padding: clamp(4px, 1svh, 8px) 0; 
         letter-spacing: clamp(1.5px, 0.3vw, 2px); 
       }
       .nav-links.mobile-open a::after { display: none; }
+      .nav-links.mobile-open .nav-mobile-extra {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(14px, 2.5svh, 20px);
+        margin-top: clamp(6px, 1.5svh, 12px);
+        padding-top: clamp(14px, 2.5svh, 20px);
+        border-top: 1px solid rgba(201,168,76,0.15);
+        width: 100%;
+      }
+      .nav-links.mobile-open .nav-mobile-extra .nav-cta { width: min(100%, 260px); }
+      .nav-links.mobile-open .nav-mobile-extra .nav-socials { display: flex; gap: clamp(14px, 3vw, 18px); }
       .quote-form-row { grid-template-columns: 1fr; }
       .quote-modal { max-width: 96vw; }
       .services-grid { grid-template-columns: 1fr; }
@@ -1506,11 +1526,11 @@
         padding: 0 clamp(8px, 2vw, 12px);
       }
       .products-grid { 
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         gap: 2px;
       }
       .product-card {
-        min-height: 300px;
+        aspect-ratio: 3/4;
       }
       .stat { text-align: left; }
       .hero-stats { justify-content: flex-start; gap: clamp(16px, 3vw, 24px); }
@@ -1622,6 +1642,16 @@
       <li><a onclick="showPage('ongoing'); closeMobileNav();" id="nav-ongoing">Ongoing</a></li>
       <li><a href="#services" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('services');">Services</a></li>
       <li><a href="#contact" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('contact');">Contact</a></li>
+      <li class="nav-mobile-extra">
+        <button class="nav-cta" onclick="showPage('home'); closeMobileNav(); scrollAfterNav('contact');">Get a Quote</button>
+        <div class="nav-socials">
+          <a href="https://instagram.com" target="_blank" rel="noopener" title="Instagram"><svg><use href="#icon-instagram"/></svg></a>
+          <a href="https://tiktok.com" target="_blank" rel="noopener" title="TikTok"><svg><use href="#icon-tiktok"/></svg></a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" title="Facebook"><svg><use href="#icon-facebook"/></svg></a>
+          <a href="https://x.com" target="_blank" rel="noopener" title="X"><svg><use href="#icon-x"/></svg></a>
+          <a href="https://wa.me/254722584860" target="_blank" rel="noopener" title="WhatsApp"><svg><use href="#icon-whatsapp"/></svg></a>
+        </div>
+      </li>
     </ul>
 
     <div class="nav-right">
@@ -1856,8 +1886,17 @@
     
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
-    function toggleMobileNav() { navToggle.classList.toggle('active'); navLinks.classList.toggle('mobile-open'); }
-    function closeMobileNav() { navToggle.classList.remove('active'); navLinks.classList.remove('mobile-open'); }
+    function toggleMobileNav() {
+      const opening = !navLinks.classList.contains('mobile-open');
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('mobile-open');
+      document.body.style.overflow = opening ? 'hidden' : '';
+    }
+    function closeMobileNav() {
+      navToggle.classList.remove('active');
+      navLinks.classList.remove('mobile-open');
+      document.body.style.overflow = '';
+    }
     
     let activeProduct = {};
     function openQuoteModal(event, productName, category, context, imgSrc) {
