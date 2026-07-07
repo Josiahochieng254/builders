@@ -470,7 +470,11 @@
       position: relative; 
       border: 1px solid rgba(201,168,76,0.2);
       border-radius: 2px;
+      overflow: visible;
+    }
+    .about-visual-inner {
       overflow: hidden;
+      border-radius: 2px;
     }
     .about-visual img {
       width: 100%; 
@@ -481,14 +485,15 @@
     }
     .about-badge {
       position: absolute; 
-      bottom: clamp(-12px, -2vw, -20px); 
-      left: clamp(-12px, -2vw, -20px);
+      bottom: clamp(-20px, -3vw, -10px); 
+      left: clamp(-20px, -3vw, -10px);
       background: var(--gold); 
       color: var(--dark);
       padding: clamp(14px, 2vw, 20px) clamp(20px, 3vw, 28px);
       font-family: 'Bebas Neue', sans-serif;
       box-shadow: 0 12px 30px rgba(0,0,0,0.35);
       border-radius: 2px;
+      max-width: calc(100% - 20px);
     }
     .about-badge .badge-num { 
       font-size: clamp(32px, 6vw, 42px); 
@@ -1708,7 +1713,9 @@
         </div>
       </div>
       <div class="about-visual reveal">
-        <img src="proof10.jpg" alt="Crowfit Construction Site" />
+        <div class="about-visual-inner">
+          <img src="proof10.jpg" alt="Crowfit Construction Site" />
+        </div>
         <div class="about-badge">
           <div class="badge-num">10+</div>
           <div class="badge-text">Years of Excellence</div>
@@ -1953,4 +1960,4 @@
     });
   </script>
 </body>
-  </html>
+        </html>
