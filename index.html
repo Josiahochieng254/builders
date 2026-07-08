@@ -1001,31 +1001,31 @@
     .ongoing-projects-section { 
       padding: clamp(40px, 6vw, 80px) clamp(16px, 5vw, 80px); 
     }
+
+    /* Masonry-style grid — each project photo keeps its own natural
+       aspect ratio (portrait, landscape, square, huge 4:3, etc.)
+       instead of being cropped into a uniform box. CSS multi-column
+       layout naturally reflows tiles of different heights and stays
+       fully responsive by simply changing the column count/width. */
     .ongoing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 45vw, 350px), 1fr));
-      gap: 2px;
+      columns: 3 220px;
+      column-gap: clamp(8px, 1.5vw, 16px);
     }
     .ongoing-item {
-      position: relative; 
+      position: relative;
       overflow: hidden;
-      cursor: pointer; 
+      cursor: pointer;
       background: var(--dark3);
       border-radius: 2px;
-      aspect-ratio: 703 / 688;
-    }
-    .ongoing-item::before {
-      content: ''; 
-      display: block;
-      padding-top: calc(688 / 703 * 100%);
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      margin-bottom: clamp(8px, 1.5vw, 16px);
+      display: inline-block;
+      width: 100%;
     }
     .ongoing-item img {
-      position: absolute; 
-      inset: 0;
-      width: 100%; 
-      height: 100%;
-      object-fit: cover; 
-      object-position: center;
+      width: 100%;
+      height: auto;
       display: block;
       transition: transform 0.55s ease, filter 0.4s ease;
       filter: brightness(0.82);
@@ -1454,6 +1454,7 @@
       .work-item:nth-child(5) { 
         grid-column: span 1; 
       }
+      .ongoing-grid { columns: 2 200px; }
       section { padding: clamp(32px, 6vw, 80px) clamp(16px, 4vw, 32px); }
     }
 
@@ -1534,9 +1535,7 @@
         align-items: flex-start; 
         gap: clamp(6px, 1.5vw, 10px);
       }
-      .ongoing-grid {
-        grid-template-columns: repeat(auto-fit, minmax(clamp(150px, 40vw, 250px), 1fr));
-      }
+      .ongoing-grid { columns: 2 150px; }
       .ongoing-cta { 
         flex-direction: column; 
         align-items: flex-start; 
@@ -1585,6 +1584,7 @@
       .works-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+      .ongoing-grid { columns: 1 260px; }
       .contact-item { gap: clamp(10px, 2vw, 12px); }
       .contact-icon { width: clamp(32px, 8vw, 38px); height: clamp(32px, 8vw, 38px); font-size: clamp(13px, 3.5vw, 16px); }
       .about-badge { left: 0; bottom: 0; }
@@ -1873,6 +1873,71 @@
     </footer>
   </div>
 
+  <!-- ONGOING PROJECTS PAGE -->
+  <div id="page-ongoing" class="page">
+    <div class="ongoing-hero">
+      <div class="section-eyebrow">Live Right Now</div>
+      <h2 class="section-title">Ongoing <span>Projects</span></h2>
+      <p>A real-time look at the builds currently underway across our sites. Photos are updated as work progresses, so check back often to follow along.</p>
+    </div>
+    <div class="ongoing-projects-section">
+      <div class="ongoing-grid reveal">
+        <div class="ongoing-item" onclick="openLightbox('proj1.jpg')">
+          <img src="proj1.jpg" alt="Ongoing Project 1" width="780" height="1040" loading="lazy"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Site 01</div>
+            <div class="ongoing-item-label">Progress Update</div>
+            <div class="ongoing-item-expand">View Full Image →</div>
+          </div>
+        </div>
+        <div class="ongoing-item" onclick="openLightbox('proj2.jpg')">
+          <img src="proj2.jpg" alt="Ongoing Project 2" width="952" height="762" loading="lazy"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Site 02</div>
+            <div class="ongoing-item-label">Progress Update</div>
+            <div class="ongoing-item-expand">View Full Image →</div>
+          </div>
+        </div>
+        <div class="ongoing-item" onclick="openLightbox('proj3.jpg')">
+          <img src="proj3.jpg" alt="Ongoing Project 3" width="4000" height="3000" loading="lazy"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Site 03</div>
+            <div class="ongoing-item-label">Progress Update</div>
+            <div class="ongoing-item-expand">View Full Image →</div>
+          </div>
+        </div>
+        <div class="ongoing-item" onclick="openLightbox('proj4.jpg')">
+          <img src="proj4.jpg" alt="Ongoing Project 4" width="720" height="540" loading="lazy"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Site 04</div>
+            <div class="ongoing-item-label">Progress Update</div>
+            <div class="ongoing-item-expand">View Full Image →</div>
+          </div>
+        </div>
+        <div class="ongoing-item" onclick="openLightbox('proj5.jpg')">
+          <img src="proj5.jpg" alt="Ongoing Project 5" width="992" height="774" loading="lazy"/>
+          <div class="ongoing-expand-icon">⤢</div>
+          <div class="ongoing-item-overlay">
+            <div class="ongoing-item-num">Site 05</div>
+            <div class="ongoing-item-label">Progress Update</div>
+            <div class="ongoing-item-expand">View Full Image →</div>
+          </div>
+        </div>
+      </div>
+      <div class="ongoing-cta">
+        <div class="ongoing-cta-text">
+          <h3>Want Updates on Your Project?</h3>
+          <p>We share progress photos regularly. Reach out anytime for a status update on your build.</p>
+        </div>
+        <button class="btn-primary" onclick="showPage('home'); scrollAfterNav('contact');">Contact Us</button>
+      </div>
+    </div>
+  </div>
+
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
     <span class="lightbox-close" onclick="closeLightbox()">×</span>
@@ -1911,8 +1976,9 @@
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById('page-' + name).classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      document.getElementById('nav-home').classList.remove('nav-active');
-      if (name === 'home') document.getElementById('nav-home').classList.add('nav-active');
+      document.querySelectorAll('#navLinks > li > a[id^="nav-"]').forEach(a => a.classList.remove('nav-active'));
+      const activeLink = document.getElementById('nav-' + name);
+      if (activeLink) activeLink.classList.add('nav-active');
       setTimeout(checkReveals, 100);
     }
     function scrollAfterNav(id) { setTimeout(() => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }, 80); }
@@ -2051,4 +2117,4 @@
     });
   </script>
 </body>
-  </html>
+          </html>
