@@ -1118,16 +1118,19 @@
     }
     .footer-top {
       display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(clamp(200px, 40vw, 280px), 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
       gap: clamp(30px, 4vw, 60px); 
       margin-bottom: clamp(32px, 5vw, 48px);
     }
+    .footer-brand, .footer-col { min-width: 0; }
     .footer-brand .nav-logo { margin-bottom: clamp(12px, 2vw, 18px); cursor: default; }
+    .footer-brand .nav-logo-text { min-width: 0; }
     .footer-brand p { 
       font-size: clamp(11px, 1.5vw, 13px); 
       color: var(--text-muted); 
       line-height: 1.75; 
       margin-bottom: clamp(14px, 2vw, 20px); 
+      overflow-wrap: break-word;
     }
 
     /* Footer social icons */
@@ -1144,6 +1147,7 @@
       justify-content: center;
       width: clamp(28px, 5vw, 36px); 
       height: clamp(28px, 5vw, 36px);
+      flex-shrink: 0;
       border: 1px solid rgba(201,168,76,0.2);
       color: rgba(255,255,255,0.4);
       transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
@@ -1183,6 +1187,8 @@
       color: var(--text-muted); 
       transition: color 0.2s;
       cursor: pointer;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
     .footer-col ul li a:hover { color: var(--white); }
     .footer-col ul li a:active { opacity: 0.8; }
@@ -1199,6 +1205,9 @@
     .footer-bottom p { 
       font-size: clamp(10px, 1.5vw, 12px); 
       color: rgba(255,255,255,0.3); 
+      overflow-wrap: break-word;
+      min-width: 0;
+      max-width: 100%;
     }
     .footer-bottom span { color: var(--gold); }
 
@@ -1979,4 +1988,4 @@
     });
   </script>
 </body>
-    </html>
+                                                                                                                                                                             </html>
