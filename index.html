@@ -348,6 +348,8 @@
       font-size: clamp(32px, 8vw, 48px); 
       color: var(--gold); 
       line-height: 1;
+      font-variant-numeric: tabular-nums;
+      display: inline-block;
     }
     .stat-label {
       font-size: clamp(8px, 1.5vw, 10px); 
@@ -1928,6 +1930,13 @@
     function animateStatCounter(el) {
       const target = parseFloat(el.dataset.target || '0');
       const suffix = el.dataset.suffix || '';
+      // Lock in the final rendered width first so the growing digits never
+      // shift surrounding layout — matters most on narrow mobile widths
+      // where .hero-stats has little gap to spare.
+      const finalText = target + suffix;
+      el.textContent = finalText;
+      el.style.minWidth = el.getBoundingClientRect().width + 'px';
+      el.textContent = '0' + suffix;
       const duration = 1400;
       const startTime = performance.now();
       function tick(now) {
@@ -1938,7 +1947,8 @@
         if (progress < 1) {
           requestAnimationFrame(tick);
         } else {
-          el.textContent = target + suffix;
+          el.textContent = finalText;
+          el.dataset.animated = 'true';
         }
       }
       requestAnimationFrame(tick);
@@ -1953,6 +1963,18 @@
       });
     }, { threshold: 0.3 });
     statNums.forEach(el => statObserver.observe(el));
+    let statResizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(statResizeTimer);
+      statResizeTimer = setTimeout(() => {
+        statNums.forEach(el => {
+          if (el.dataset.animated === 'true') {
+            el.style.minWidth = '';
+            el.style.minWidth = el.getBoundingClientRect().width + 'px';
+          }
+        });
+      }, 150);
+    });
     
     function openLightbox(src) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow = 'hidden'; }
     function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow = ''; }
@@ -2029,4 +2051,4 @@
     });
   </script>
 </body>
-  </html>                                                                                                                                                          </html>
+  </html>
